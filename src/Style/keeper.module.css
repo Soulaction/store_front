@@ -1,0 +1,12 @@
+.main{
+display: flex;
+justify-content: left;
+}
+
+.block{
+    margin: 5px 10px;
+    height: 70px;
+    width: 70px;
+    background: black; 
+    color: white;
+}
