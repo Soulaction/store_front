@@ -4,14 +4,14 @@ import { useContext, useState, useEffect } from 'react';
 import { Context } from '../index';
 import { fetchOrders, fetchSendOrders, fetchPaymantOrders, fetchOneOrders } from '../http/orderApi'
 import OrderItem from '../components/OrderItem'
-import { useHistory } from 'react-router';
-import { STORE_KEEPER_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite'
+import {useNavigate} from "react-router-dom";
+import {STORE_KEEPER_ROUTE} from "../components/AppRouter/consts";
 
 const Keeper = observer (() => {
 
     const { order } = useContext(Context)
-    const history = useHistory()
+    const navigate = useNavigate()
     const [changeStatusVisible, setStatusVisible] = useState(false)
 
     useEffect(() => {
@@ -20,24 +20,24 @@ const Keeper = observer (() => {
 
     const allSelect = async () => {
         await fetchOrders().then(data => order.setOrders(data))
-        history.push(STORE_KEEPER_ROUTE)
+        navigate(STORE_KEEPER_ROUTE)
     }
 
     const paymantSelect = async () => {
         await fetchPaymantOrders().then(data => order.setOrders(data))
-        history.push(STORE_KEEPER_ROUTE)
+        navigate(STORE_KEEPER_ROUTE)
     }
 
     const sendSelect = async () => {
         await fetchSendOrders().then(data => order.setOrders(data))
-        history.push(STORE_KEEPER_ROUTE)
+        navigate(STORE_KEEPER_ROUTE)
     }
 
     const seerch = async (id) => {
         await fetchOneOrders(id).then(data => order.setOrders(data))
-        history.push(STORE_KEEPER_ROUTE)
+        navigate(STORE_KEEPER_ROUTE)
     }
-    
+
     return (
         <Container className="mt-3">
             <div className="d-flex mb-4">

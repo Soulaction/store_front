@@ -1,17 +1,15 @@
-import { React, useContext } from "react";
-import { Context } from "../index";
-import { useHistory } from "react-router-dom";
-import { Navbar, Nav, Container, Button } from 'react-bootstrap'
-import { NavLink } from "react-router-dom";
-import { SHOP_ROUTE } from "../utils/consts";
-import { observer } from "mobx-react-lite"
-import { ADMIN_ROUTE, LOGIN_ROUTE, BASKET_ROUTE, STORE_KEEPER_ROUTE } from '../utils/consts'
+import {React, useContext} from "react";
+import {Context} from "../index";
+import {NavLink, useNavigate} from "react-router-dom";
+import {Button, Container, Nav, Navbar} from 'react-bootstrap'
+import {observer} from "mobx-react-lite"
 import basket from "../image/basket.png"
+import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, STORE_KEEPER_ROUTE} from "./AppRouter/consts";
 
 
 const NavBar = observer(() => {
     const { user } = useContext(Context)
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const logOut = () => {
         user.setIsAuth(false)
@@ -30,9 +28,9 @@ const NavBar = observer(() => {
                                 width: 40, height: 40, backgroundSize: 'cover',
                                 border: 0, marginRight: '20px'
                             }}
-                                onClick={() => history.push(BASKET_ROUTE + '/' + user.user.id)}>
+                                onClick={() => navigate(BASKET_ROUTE + '/' + user.user.id)}>
                             </button>
-                            <Button className="me-2" variant={"outline-light"} onClick={() => history.push(ADMIN_ROUTE)}>Админ панель</Button>
+                            <Button className="me-2" variant={"outline-light"} onClick={() => navigate(ADMIN_ROUTE)}>Админ панель</Button>
                             <Button className="ml-2" variant={"outline-light"} onClick={() => logOut()}>Выйти</Button>
                         </Nav>
                         : user.user.role === 'STOREKEEPER' ?
@@ -42,26 +40,26 @@ const NavBar = observer(() => {
                                     width: 40, height: 40, backgroundSize: 'cover',
                                     border: 0, marginRight: '20px'
                                 }}
-                                    onClick={() => history.push(BASKET_ROUTE + '/' + user.user.id)}>
+                                    onClick={() => navigate.push(BASKET_ROUTE + '/' + user.user.id)}>
                                 </button>
-                                <Button className="me-2" variant={"outline-light"} onClick={() => history.push(STORE_KEEPER_ROUTE)}>Панель заказов</Button>
+                                <Button className="me-2" variant={"outline-light"} onClick={() => navigate.push(STORE_KEEPER_ROUTE)}>Панель заказов</Button>
                                 <Button className="ml-2" variant={"outline-light"} onClick={() => logOut()}>Выйти</Button>
                             </Nav>
                             :
-                            
+
                             <Nav className="ml-auto" style={{ color: "white" }}>
                                     <button style={{
                                     background: `url(${basket}) no-repeat center center`,
                                     width: 40, height: 40, backgroundSize: 'cover',
                                     border: 0, marginRight: '20px'
                                 }}
-                                    onClick={() => history.push(BASKET_ROUTE + '/' + user.user.id)}>
+                                    onClick={() => navigate(BASKET_ROUTE + '/' + user.user.id)}>
                                 </button>
                                 <Button className="ml-2" variant={"outline-light"} onClick={() => logOut()}>Выйти</Button>
                             </Nav>
                     :
                     <Nav className="ml-auto" style={{ color: "white" }}>
-                        <Button variant="outline-light" onClick={() => history.push(LOGIN_ROUTE)}>Авторизация</Button>
+                        <Button variant="outline-light" onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
                     </Nav>
                 }
             </Container>

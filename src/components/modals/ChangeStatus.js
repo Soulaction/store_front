@@ -1,21 +1,21 @@
 import React, { useContext, useState } from "react";
 import { Form, Modal, Button, Dropdown } from "react-bootstrap";
-import { useHistory } from "react-router";
 import { Context } from "../../index";
 import { updateOneOrders, fetchOrders } from '../../http/orderApi'
 import {STORE_KEEPER_ROUTE} from '../../utils/consts'
+import {useNavigate} from "react-router-dom";
 
 const ChangeStatus = ({ show, onHide }) => {
 
     const [id, setID] = useState();
     const [status, setStatus] = useState();
-    const history = useHistory()
+    const navigate = useNavigate()
     const { order } = useContext(Context)
 
     const updateOrder = async (id, statusOrder) => {
         await updateOneOrders(id, statusOrder).then(data => onHide())
         fetchOrders().then(data => order.setOrders(data))
-        history.push(STORE_KEEPER_ROUTE)
+        navigate(STORE_KEEPER_ROUTE)
     }
 
     return (

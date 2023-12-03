@@ -1,16 +1,15 @@
 import { observer } from "mobx-react-lite"
 import { useContext } from "react"
 import { Col, Card, Image, Container } from 'react-bootstrap'
-import { useHistory } from "react-router"
 import { Context } from "../index"
-import star from '../image/star.png'
-import { DEVICE_ROUTE } from "../utils/consts"
 import addInBasket from "../image/addInBasket.png"
 import favorite from "../image/favorite.png"
+import {DEVICE_ROUTE} from "./AppRouter/consts";
+import {useNavigate} from "react-router-dom";
 
 
 const DeviceItem = observer(({device}) => {
-    const history = useHistory()
+    const navigate = useNavigate()
     const { devices } = useContext(Context)
     const brand = devices.brands.filter((brand) => brand.id == devices.brandId)
 
@@ -33,10 +32,10 @@ const DeviceItem = observer(({device}) => {
     function dragDropHandler(e, device) {
 
     }
-    
+
     return (
         <Col md={3} onClick={()=>{
-            history.push(DEVICE_ROUTE + '/' + devices.id);
+            navigate(DEVICE_ROUTE + '/' + devices.id);
             localStorage.setItem('brand', brand[0].name);
         }}>
             <Card
@@ -62,44 +61,44 @@ const DeviceItem = observer(({device}) => {
                 <div>{devices.name}</div>
 
                 <div style = {{
-                    color: "black", 
+                    color: "black",
                     fontWeight:"bold"}}
                 >
                     {"Цена: " + devices.price + " ₽"}</div>
-                
+
                 <Container>
-                    <button 
+                    <button
                         style={{
                                 background: `url(${addInBasket}) no-repeat center center`,
                                 width: 30, height: 30, backgroundSize: 'cover',
                                 border: 0, marginRight: '30px'
                         }}
 
-                            type="button" 
-                            class="btn btn-secondary" 
-                            data-bs-toggle="tooltip" 
-                            data-bs-placement="bottom" 
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
                             title="Добавить в корзину"
                     >
                     </button>
-                    
-                    <button 
+
+                    <button
                         style={{
                                 background: `url(${favorite}) no-repeat center center`,
                                 width: 30, height: 30, backgroundSize: 'cover',
                                 border: 0, marginRight: '30px'
                         }}
 
-                            type="button" 
-                            class="btn btn-secondary" 
-                            data-bs-toggle="tooltip" 
-                            data-bs-placement="bottom" 
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
                             title ="Добавить в избранное"
                     >
                     </button>
                 </Container>
 
-                    
+
 
             </Card>
         </Col>
