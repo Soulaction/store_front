@@ -14,8 +14,6 @@ export default class DeviceStore {
         makeAutoObservable(this)
     }
 
-
-
     setTypes(types) {
         this._types = types
     }

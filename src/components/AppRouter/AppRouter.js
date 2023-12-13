@@ -6,7 +6,6 @@ import { SHOP_ROUTE } from './consts';
 
 const AppRouter = () => {
     const { user } = useContext(Context)
-    console.log(user)
     return (
         <Routes>
             { /*user.isAuth &&*/ authRoutes.map(({ path, Component }) =>

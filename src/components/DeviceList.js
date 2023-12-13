@@ -7,12 +7,12 @@ import DeviceItem from "./DeviceItem"
 
 
 const DeviceList = observer(() => {
-    const { devices } = useContext(Context)
-    console.log(devices);
+    const { device } = useContext(Context)
+    console.log(device.devices);
     return (
         <Row >
-            {devices?.devices?.map(el => (
-                <DeviceItem key={el.id} device={el} />
+            {device?.devices?.map(el => (
+                <DeviceItem key={el.id} deviceItem={el} />
             ))}
         </Row>
     )
