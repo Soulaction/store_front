@@ -6,7 +6,7 @@ import addInBasket from "../image/addInBasket.png"
 import favorite from "../image/favorite.png"
 import {DEVICE_ROUTE} from "./AppRouter/consts";
 import {useNavigate} from "react-router-dom";
-import {Device} from "../model/Device";
+import {Device} from "model/Device";
 
 export interface DeviceItemProps {
     deviceItem: Device

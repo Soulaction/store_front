@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "./build",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnreachableCode": false,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./src",
+    "./react-app-env.d.ts"
+  ]
+}
