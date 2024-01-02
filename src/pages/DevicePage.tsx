@@ -50,7 +50,7 @@ const DevicePage = observer(() => {
             </Row>
             <Row className="mt-3">
                 <h1>Характеристики</h1>
-                {deviceNew.info.map((info, index) =>
+                {deviceNew.info.map((info) =>
                     <Row key={info.id}>
                         {info.title}: {info.discription}
                     </Row>

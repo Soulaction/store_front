@@ -1,4 +1,5 @@
 export interface Type {
     id: number,
-    name: string
+    name: string,
+    img: string
 }

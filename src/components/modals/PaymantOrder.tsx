@@ -20,7 +20,7 @@ const PaymantOrder: FC<PaymantOrderType> = observer(({ show, onHide, idBasketDev
   const [check2, setCheck2] = useState(false)
 
   function getCheckedCheckBoxes() {
-    let checkboxes = document.getElementsByClassName('checkbox1');
+    // let checkboxes = document.getElementsByClassName('checkbox1');
     let checkboxesChecked;
     // for (let index = 0; index < checkboxes.length; index++) {
     //   if (checkboxes[index]?.checked) {

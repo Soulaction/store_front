@@ -21,7 +21,7 @@ const CreateOrder: FC<CreateOrderType> = observer(({ show, onHide, idBasketDevic
   const { userStore, basketStore } = useContext(ContextApp)
 
   function getCheckedCheckBoxes() {
-    let checkboxes = document.getElementsByClassName('checkbox');
+    // let checkboxes = document.getElementsByClassName('checkbox');
     let checkboxesChecked;
     // for (let index = 0; index < checkboxes.length; index++) {
     //   if (checkboxes[index].checked) {

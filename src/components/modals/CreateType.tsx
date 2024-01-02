@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import { Form, Modal, Button } from "react-bootstrap";
-import { createType } from "../../http/deviceAPI";
+import {createType} from "../../http/types-http";
 
 export interface CreateTypeProps {
   show: boolean,

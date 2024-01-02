@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {ContextApp} from "../index";
 import {Pagination} from "react-bootstrap";

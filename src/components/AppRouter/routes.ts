@@ -4,7 +4,17 @@ import Basket from "../../pages/Basket"
 import DevicePage from "../../pages/DevicePage"
 import Shop from "../../pages/Shop"
 import Keeper from "../../pages/Keeper"
-import { ADMIN_ROUTE, BASKET_ROUTE, DEVICE_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE, STORE_KEEPER_ROUTE } from "./consts"
+import {
+    ADMIN_ROUTE,
+    BASKET_ROUTE,
+    DEVICE_ROUTE,
+    LOGIN_ROUTE,
+    PRODUCT_ROUTE,
+    REGISTRATION_ROUTE,
+    SHOP_ROUTE,
+    STORE_KEEPER_ROUTE
+} from "./consts"
+import Main from "../../pages/Main/Main";
 
 export const authRoutes = [
     {
@@ -27,6 +37,10 @@ export const authRoutes = [
 export const publicRoutes = [
     {
         path: SHOP_ROUTE,
+        Component: Main
+    },
+    {
+        path: PRODUCT_ROUTE,
         Component: Shop
     },
     {

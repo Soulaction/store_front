@@ -23,6 +23,8 @@ const CreateUser: FC<CreateUserProps> = observer(({ show, onHide }) => {
                 return 'Пользователь';
             case 'STOREKEEPER':
                 return 'Кладовщик';
+            default:
+                return '';
         }
     }
     const addUser = () => {

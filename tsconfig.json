@@ -20,10 +20,9 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noPropertyAccessFromIndexSignature": true,
     "allowUnreachableCode": false,
     "skipLibCheck": true
   },

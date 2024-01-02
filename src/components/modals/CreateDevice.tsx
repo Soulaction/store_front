@@ -1,8 +1,9 @@
-import { observer } from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import {FC, useContext, useEffect, useState} from "react";
-import { Form, Modal, Button, Dropdown, Row, Col } from "react-bootstrap";
-import { createDevice, fetchBrands, fetchTypes } from "../../http/deviceAPI";
-import { ContextApp } from "../../index"
+import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
+import {createDevice, fetchBrands} from "../../http/deviceAPI";
+import {ContextApp} from "../../index"
+import {fetchTypes} from "../../http/types-http";
 
 export interface CreateDeviceProps {
     show: boolean,

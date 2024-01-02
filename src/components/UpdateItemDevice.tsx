@@ -1,9 +1,8 @@
 import { observer } from "mobx-react-lite";
-import {FC, useContext, useEffect, useState} from "react";
+import {FC, useContext, useEffect} from "react";
 import { ContextApp } from "../index";
 import { Button } from "react-bootstrap"
 import { fetchDevices, deleteDevice } from "../http/deviceAPI";
-import ViewStatusOrder from "./modals/ViewStatusOrder";
 import {Device} from "../model/Device";
 
 export interface UpdateItemDeviceProps {
@@ -11,10 +10,9 @@ export interface UpdateItemDeviceProps {
     device: Device
 }
 
-const UpdateItemDevice: FC<UpdateItemDeviceProps> = observer(({key, device}) => {
+const UpdateItemDevice: FC<UpdateItemDeviceProps> = observer(({device}) => {
 
     const { deviceStore, brandsStore } = useContext(ContextApp)
-    const [updateDate, setUpdateDate] = useState(false)
 
     const brand = brandsStore.brands.filter((brand) => brand.id == device.brandId)
     const deleteItem = async () => {

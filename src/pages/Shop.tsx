@@ -1,12 +1,13 @@
 import {observer} from "mobx-react-lite";
 import {useContext, useEffect} from "react";
-import {Container, Row, Col} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {ContextApp} from "../index";
 import BrandBar from "../components/BrandBar";
 import DeviceList from "../components/DeviceList";
 import NavBar from "../components/NavBar/NavBar";
-import {fetchTypes, fetchBrands, fetchDevices} from "../http/deviceAPI";
+import {fetchBrands, fetchDevices} from "../http/deviceAPI";
 import Pages from "../components/Pages";
+import {fetchTypes} from "../http/types-http";
 
 const Shop = observer(() => {
     const {deviceStore, brandsStore, typesStore} = useContext(ContextApp);
