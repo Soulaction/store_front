@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import { Form, Modal, Button } from "react-bootstrap";
-import { createBrand } from "../../http/deviceAPI";
+import { createBrand } from "../../http/device-http";
 
 export interface CreateBrandProps {
     show: boolean,

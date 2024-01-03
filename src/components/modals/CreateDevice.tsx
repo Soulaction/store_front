@@ -1,7 +1,7 @@
 import {observer} from "mobx-react-lite";
 import {FC, useContext, useEffect, useState} from "react";
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
-import {createDevice, fetchBrands} from "../../http/deviceAPI";
+import {createDevice, fetchBrands} from "../../http/device-http";
 import {ContextApp} from "../../index"
 import {fetchTypes} from "../../http/types-http";
 
@@ -69,7 +69,7 @@ const CreateDevice: FC<CreateDeviceProps> = observer(({ show, onHide }) => {
                         <Dropdown.Toggle>{typesStore.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {typesStore.types.map(el =>
-                                <Dropdown.Item onClick={() => typesStore.setTypes(el)} key={el.id}>{el.name}</Dropdown.Item>
+                                <Dropdown.Item onClick={() => typesStore.setType(el)} key={el.id}>{el.name}</Dropdown.Item>
                             )}
                         </Dropdown.Menu>
                     </Dropdown>

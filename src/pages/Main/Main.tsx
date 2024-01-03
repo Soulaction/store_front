@@ -17,7 +17,7 @@ const Main = () => {
     return (
         <main className={s.container}>
             {types && types.map(type => (
-                    <TypeProductItem type={type}/>
+                    <TypeProductItem key={type.id} type={type}/>
             ))}
         </main>
     );

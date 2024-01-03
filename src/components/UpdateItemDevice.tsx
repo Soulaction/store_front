@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import {FC, useContext, useEffect} from "react";
 import { ContextApp } from "../index";
 import { Button } from "react-bootstrap"
-import { fetchDevices, deleteDevice } from "../http/deviceAPI";
+import { fetchDevices, deleteDevice } from "../http/device-http";
 import {Device} from "../model/Device";
 
 export interface UpdateItemDeviceProps {
@@ -17,14 +17,14 @@ const UpdateItemDevice: FC<UpdateItemDeviceProps> = observer(({device}) => {
     const brand = brandsStore.brands.filter((brand) => brand.id == device.brandId)
     const deleteItem = async () => {
         await deleteDevice (device.id)
-        fetchDevices(null, null, deviceStore.page, deviceStore.limit).then(data => {
+        fetchDevices(null, deviceStore.page, deviceStore.limit).then(data => {
             deviceStore.setDevices(data.rows)
             deviceStore.setTotalCount(data.count)
         })
     }
 
     useEffect(() => {
-        fetchDevices(null, null, deviceStore.page, deviceStore.limit).then(data => {
+        fetchDevices(null, deviceStore.page, deviceStore.limit).then(data => {
             deviceStore.setDevices(data.rows)
             deviceStore.setTotalCount(data.count)
         })

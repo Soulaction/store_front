@@ -5,7 +5,7 @@ import {ContextApp} from "../index";
 import BrandBar from "../components/BrandBar";
 import DeviceList from "../components/DeviceList";
 import NavBar from "../components/NavBar/NavBar";
-import {fetchBrands, fetchDevices} from "../http/deviceAPI";
+import {fetchBrands, fetchDevices} from "../http/device-http";
 import Pages from "../components/Pages";
 import {fetchTypes} from "../http/types-http";
 
@@ -14,7 +14,7 @@ const Shop = observer(() => {
     useEffect(() => {
         fetchTypes().then(data => typesStore.setTypes(data))
         fetchBrands().then(data => brandsStore.setBrands(data))
-        fetchDevices(null, null, 1, deviceStore.limit).then(data => {
+        fetchDevices(null, 1, deviceStore.limit).then(data => {
             deviceStore.setDevices(data.rows)
             deviceStore.setTotalCount(data.count)
         })

@@ -1,7 +1,7 @@
-import { observer } from "mobx-react-lite"
+import {observer} from "mobx-react-lite"
 import {FC, useContext} from "react"
-import { Col, Card, Image, Container } from 'react-bootstrap'
-import { ContextApp } from "../index"
+import {Col, Card, Image, Container} from 'react-bootstrap'
+import {ContextApp} from "../index"
 import addInBasket from "../image/addInBasket.png"
 import favorite from "../image/favorite.png"
 import {DEVICE_ROUTE} from "./AppRouter/consts";
@@ -14,7 +14,7 @@ export interface DeviceItemProps {
 
 const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
     const navigate = useNavigate();
-    const { brandsStore } = useContext(ContextApp);
+    const {brandsStore} = useContext(ContextApp);
     const brand = brandsStore.brands.filter((brand) => brand.id == deviceItem.brandId)[0];
 
     function dragStartHandler(e, device) {
@@ -38,7 +38,7 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
     }
 
     return (
-        <Col md={3} onClick={()=>{
+        <Col md={3} onClick={() => {
             navigate(DEVICE_ROUTE + '/' + deviceItem.id);
             localStorage.setItem('brand', brand.name);
         }}>
@@ -49,12 +49,12 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
                 onDragOver={e => dragOverHandler(e)}
                 onDrop={e => dragDropHandler(e, deviceItem)}
                 draggable={true}
-            style={{width: 150, cursor: 'pointer', margin: '7px'}} border={"light"}
+                style={{width: 150, cursor: 'pointer', margin: '7px'}} border={"light"}
             >
-                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + deviceItem.img}/>
+                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + 'devices/' + deviceItem?.img}/>
                 <div className="d-flex justify-content-between aling-items-center opacity-75">
                     <div>
-                       {brand.name}
+                        {brand?.name}
                     </div>
                     <div className="d-flex align-items-center">
                         {/* <div className="pe-1">{devices.rating}</div> */}
@@ -62,42 +62,43 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
                     </div>
 
                 </div>
-                <div>{deviceItem.name}</div>
+                <div>{deviceItem?.name}</div>
 
-                <div style = {{
+                <div style={{
                     color: "black",
-                    fontWeight:"bold"}}
+                    fontWeight: "bold"
+                }}
                 >
-                    {"Цена: " + deviceItem.price + " ₽"}</div>
+                    {"Цена: " + deviceItem?.price + " ₽"}</div>
 
                 <Container>
                     <button
                         style={{
-                                background: `url(${addInBasket}) no-repeat center center`,
-                                width: 30, height: 30, backgroundSize: 'cover',
-                                border: 0, marginRight: '30px'
+                            background: `url(${addInBasket}) no-repeat center center`,
+                            width: 30, height: 30, backgroundSize: 'cover',
+                            border: 0, marginRight: '30px'
                         }}
 
-                            type="button"
+                        type="button"
                         className="btn btn-secondary"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title="Добавить в корзину"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        title="Добавить в корзину"
                     >
                     </button>
 
                     <button
                         style={{
-                                background: `url(${favorite}) no-repeat center center`,
-                                width: 30, height: 30, backgroundSize: 'cover',
-                                border: 0, marginRight: '30px'
+                            background: `url(${favorite}) no-repeat center center`,
+                            width: 30, height: 30, backgroundSize: 'cover',
+                            border: 0, marginRight: '30px'
                         }}
 
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="bottom"
-                            title ="Добавить в избранное"
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        title="Добавить в избранное"
                     >
                     </button>
                 </Container>

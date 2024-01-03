@@ -7,7 +7,6 @@ import { Card } from 'react-bootstrap'
 
 const BrandBar = observer(() => {
     const { brandsStore } = useContext(ContextApp);
-    console.log(brandsStore);
     return (
         <div className="d-flex mt-3"
         style={{cursor: 'pointer'}}>

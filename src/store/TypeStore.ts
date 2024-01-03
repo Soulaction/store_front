@@ -9,7 +9,10 @@ export class TypeStore {
         makeAutoObservable(this)
     }
 
-    setTypes(types) {
+    setType(type: Type) {
+        this.selectedType = type;
+    }
+    setTypes(types: Type[]) {
         this.types = types;
     }
 }
