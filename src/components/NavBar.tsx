@@ -3,7 +3,7 @@ import {ContextApp} from "../index";
 import {NavLink, useNavigate} from "react-router-dom";
 import {Button, Container, Nav, Navbar} from 'react-bootstrap'
 import {observer} from "mobx-react-lite"
-import basket from "../image/basket.png"
+import basket from "../assets/basket.svg"
 import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, STORE_KEEPER_ROUTE} from "./AppRouter/consts";
 
 

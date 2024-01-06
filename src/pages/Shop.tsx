@@ -1,8 +1,7 @@
 import {observer} from "mobx-react-lite";
 import {useContext, useEffect} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import {ContextApp} from "../index";
-import BrandBar from "../components/BrandBar";
 import DeviceList from "../components/DeviceList";
 import NavBar from "../components/NavBar/NavBar";
 import {fetchBrands, fetchDevices} from "../http/device-http";
@@ -29,19 +28,16 @@ const Shop = observer(() => {
     // }, [deviceStore.page, typesStore.selectedType, brandsStore.selectedBrand,])
 
     return (
-        <Container>
             <Row>
                 <Col md={3}>
                     <NavBar/>
                 </Col>
 
                 <Col md={9}>
-                    <BrandBar/>
                     <DeviceList/>
                     <Pages/>
                 </Col>
             </Row>
-        </Container>
     )
 })
 

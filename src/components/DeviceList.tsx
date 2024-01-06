@@ -1,17 +1,18 @@
-import { observer } from "mobx-react-lite"
+import {observer} from "mobx-react-lite"
 import {useContext, useEffect, useState} from "react"
-import { ContextApp } from "../index"
-import { Row } from 'react-bootstrap'
-import DeviceItem from "./DeviceItem"
+import {ContextApp} from "../index"
+import {Row} from 'react-bootstrap'
+import DeviceItem from "./DeviceItem/DeviceItem"
 import {Device} from "../model/Device";
 import {fetchDevices} from "../http/device-http";
-
+import {TypeCard} from "../model/TypeCard";
 
 
 const DeviceList = observer(() => {
-    const { typesStore } = useContext(ContextApp);
+    const {typesStore} = useContext(ContextApp);
     const [devices, setDevices] = useState<Device[]>([]);
-    console.log('DeviceList', typesStore);
+    const [typeCard, setTypeCard] = useState<TypeCard>('card');
+    console.log('DeviceList');
 
     useEffect(() => {
         fetchDevices(typesStore.selectedType?.id, 1, 10).then(devices => {
@@ -21,11 +22,11 @@ const DeviceList = observer(() => {
     }, [typesStore])
 
     return (
-        <Row >
+        <div>
             {devices && devices.map(el => (
-                <DeviceItem key={el.id} deviceItem={el} />
+                <DeviceItem key={el.id} deviceItem={el} type={typeCard}/>
             ))}
-        </Row>
+        </div>
     )
 })
 

@@ -1,0 +1,78 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    max-width: 210px;
+    width: 100%;
+    min-height: 350px;
+}
+
+.cardImg {
+    display: block;
+    object-fit: cover;
+    min-height: 230px;
+    padding: 0 10px;
+}
+
+.cardPrice {
+    margin: 5px 0 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.cardName {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.cardName:hover {
+    cursor: pointer;
+    color: #bd0f2c;
+}
+
+.cardFooter {
+    display: flex;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.button {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    outline: none;
+    border: none;
+    transition: opacity .5s;
+}
+
+.button:nth-last-of-type(2) {
+    margin-left: auto;
+}
+
+.button:hover {
+    opacity: .7;
+}
+
+.cardBasketButton {
+    background-color: #bd0f2c;
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;;
+}
+
+.cardIconButton {
+    width: 30px;
+    height: 30px;
+}
+
+.cardIconButton:first-of-type {
+    margin-right: 10px;
+}
