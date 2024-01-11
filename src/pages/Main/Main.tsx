@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Type} from "../../model/Type";
 import {fetchTypes} from "../../http/types-http";
 import TypeProductItem from "../../components/TypeProductItem/TypeProductItem";
-import s from './main.module.css'
+import s from './Main.module.css'
 
 
 const Main = () => {

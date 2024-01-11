@@ -5,7 +5,7 @@ export default class DeviceStore {
     devices: Device[] = [];
     page: number = 1;
     totalCount: number = 0;
-    limit: number = 5;
+    limit: number = 10;
 
     constructor() {
         makeAutoObservable(this);

@@ -1,0 +1,46 @@
+.header {
+    display: flex;
+    padding: 0 75px;
+    align-items: center;
+    background-color: black;
+    min-height: 60px;
+}
+
+.mainPageLink {
+    margin-right: auto;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.link {
+
+}
+
+.icon {
+    width: 27px;
+    height: 27px;
+}
+
+.avatarBlock {
+    display: flex;
+}
+
+.button {
+    display: inline-block;
+    margin: 0 25px 0 0;
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+
+.arrowDownIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.arrowDownButton {
+    margin: 0 0 0 3px;
+}

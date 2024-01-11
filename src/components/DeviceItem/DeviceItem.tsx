@@ -16,8 +16,6 @@ export interface DeviceItemProps {
 
 const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
     const navigate = useNavigate();
-    const {brandsStore} = useContext(ContextApp);
-    const brand = brandsStore.brands.filter((brand) => brand.id == deviceItem.brandId)[0];
 
     function dragStartHandler(e, device) {
 
@@ -52,7 +50,7 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
             <p className={s.cardPrice}>{deviceItem?.price + ' ₽'}</p>
             <a className={s.cardName}>{deviceItem?.name}</a>
             <div className={s.cardFooter}>
-                <button className={s.button + ' ' + s.cardBasketButton}>Корзина</button>
+                <button className={s.button + ' ' + s.cardBasketButton}>В корзину</button>
                 <button className={s.button}>
                     <img className={s.cardIconButton} src={likeIcon} alt="Иконака добавления в избранное"/>
                 </button>

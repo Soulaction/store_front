@@ -1,0 +1,12 @@
+.main {
+    display: flex;
+    margin-top: 15px;
+}
+
+.form {
+    width: 20%;
+}
+
+.products {
+    width: 80%;
+}
