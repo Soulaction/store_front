@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite"
 import { Button } from "react-bootstrap";
 import { Card, Container, Form, Row } from "react-bootstrap";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import { login, registration } from "../http/userAPI";
+import { login, registration } from "../http/user-http";
 import { ContextApp } from "../index"
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../components/AppRouter/consts";
 

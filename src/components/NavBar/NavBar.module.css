@@ -1,6 +1,7 @@
 .header {
     display: flex;
-    padding: 0 75px;
+    padding: 0 50px;
+    width: 100%;
     align-items: center;
     background-color: black;
     min-height: 60px;
@@ -14,10 +15,6 @@
     text-decoration: none;
 }
 
-.link {
-
-}
-
 .icon {
     width: 27px;
     height: 27px;
@@ -25,22 +22,14 @@
 
 .avatarBlock {
     display: flex;
+    align-items: center;
 }
 
 .button {
-    display: inline-block;
-    margin: 0 25px 0 0;
+    display: block;
+    margin: 0 15px 0 0;
     padding: 0;
     background-color: transparent;
     outline: none;
     border: none;
-}
-
-.arrowDownIcon {
-    width: 20px;
-    height: 20px;
-}
-
-.arrowDownButton {
-    margin: 0 0 0 3px;
 }

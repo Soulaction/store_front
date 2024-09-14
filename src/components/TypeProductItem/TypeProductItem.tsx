@@ -3,7 +3,7 @@ import {Type} from "../../model/Type";
 import {NavLink} from 'react-router-dom'
 import s from './typeProductItem.module.css'
 import {ContextApp} from "../../index";
-import {PRODUCT_ROUTE} from "../AppRouter/consts";
+import {PRODUCTS_ROUTE} from "../AppRouter/consts";
 import {observer} from "mobx-react-lite";
 
 export interface TypeProductItemType {
@@ -19,7 +19,7 @@ const TypeProductItem: FC<TypeProductItemType> = observer(({type}) => {
     }
 
     return (
-        <NavLink className={s.card} onClick={() => getProductsByType(type)} to={PRODUCT_ROUTE}>
+        <NavLink className={s.card} onClick={() => getProductsByType(type)} to={PRODUCTS_ROUTE}>
             <img className={s.imgCard}
                  src={`${process.env.REACT_APP_API_URL}types/${type?.img}`}
                  alt={`Картинка типа ${type?.name}`}/>

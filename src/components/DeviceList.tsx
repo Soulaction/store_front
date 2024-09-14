@@ -2,7 +2,7 @@ import {observer} from "mobx-react-lite"
 import {useContext, useState} from "react"
 import {ContextApp} from "../index"
 import DeviceItem from "./DeviceItem/DeviceItem"
-import {TypeCard} from "../model/TypeCard";
+import {TypeCard} from "../model/programm-types/TypeCard";
 
 
 const DeviceList = observer(() => {

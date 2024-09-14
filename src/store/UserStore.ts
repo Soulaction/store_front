@@ -3,7 +3,7 @@ import {User} from "../model/User";
 
 export default class UserStore {
     user: User;
-    isAuth: boolean = false;
+    isAuth: boolean = true;
 
     constructor() {
         makeAutoObservable(this)

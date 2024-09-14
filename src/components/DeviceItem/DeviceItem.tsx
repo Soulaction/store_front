@@ -1,10 +1,10 @@
 import {observer} from "mobx-react-lite"
 import {FC, useContext} from "react"
 import {ContextApp} from "../../index"
-import {DEVICE_ROUTE} from "../AppRouter/consts";
+import {PRODUCT_ROUTE} from "../AppRouter/consts";
 import {useNavigate} from "react-router-dom";
 import {Device} from "model/Device";
-import {TypeCard} from "../../model/TypeCard";
+import {TypeCard} from "../../model/programm-types/TypeCard";
 import s from "./deviceItem.module.css";
 import likeIcon from '../../assets/like.svg';
 import analysisIcon from '../../assets/analysis.svg';
@@ -38,7 +38,7 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
     }
 
     return (
-        <div className={s.card} onClick={() => navigate(DEVICE_ROUTE + '/' + deviceItem.id)}
+        <div className={s.card} onClick={() => navigate(PRODUCT_ROUTE + '/' + deviceItem.id)}
              onDrag={e => dragStartHandler(e, deviceItem)}
              onDragLeave={e => dragEndHandler(e)}
              onDragEnd={e => dragLeaveHandler(e)}
