@@ -43,6 +43,7 @@ export const TypeEdit = () => {
             .then(() => {
                 messageApi.success('Тип сохранён');
                 setIsModalOpen(false);
+                getTypes();
             })
     };
 

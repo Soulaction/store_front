@@ -12,5 +12,5 @@ export const fetchTypes = async (): Promise<Type[]> => {
 }
 
 export const deleteType = async (id: number): Promise<void> => {
-    await $authHost.delete<void>('/type');
+    await $authHost.delete<void>('/type/' + id);
 }

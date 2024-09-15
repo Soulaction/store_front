@@ -19,7 +19,10 @@ $authHost.interceptors.response.use(config => {
         return config;
     },
     (error: AxiosError) => {
-        const errorInfo = error.response.data;
+        const errorInfo = error.response?.data;
+        if(!errorInfo) {
+           console.error(error);
+        }
         if (errorInfo instanceof Object) {
             msgShare.publish((errorInfo as Error).message);
         } else {
