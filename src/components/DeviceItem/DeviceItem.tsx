@@ -1,21 +1,20 @@
 import {observer} from "mobx-react-lite"
-import {FC, useContext} from "react"
-import {ContextApp} from "../../index"
+import React, {FC, useState} from "react"
 import {PRODUCT_ROUTE} from "../AppRouter/consts";
 import {useNavigate} from "react-router-dom";
 import {Device} from "model/Device";
-import {TypeCard} from "../../model/programm-types/TypeCard";
-import s from "./deviceItem.module.css";
-import likeIcon from '../../assets/like.svg';
-import analysisIcon from '../../assets/analysis.svg';
+import s from "./DeviceItem.module.css";
+import editIcon from '../../assets/edit.svg';
+import Button from "../Button/Button";
+import CreateOrUpdateDevice from "../../pages/Admimstration/pages/ProductEdit/modals/CreateOrUpdateDevice";
 
 export interface DeviceItemProps {
-    deviceItem: Device,
-    type: TypeCard
+    deviceItem: Device
 }
 
 const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
     const navigate = useNavigate();
+    const [isAddModal, setIsAddModal] = useState<boolean>(false);
 
     function dragStartHandler(e, device) {
 
@@ -38,28 +37,29 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
     }
 
     return (
-        <div className={s.card} onClick={() => navigate(PRODUCT_ROUTE + '/' + deviceItem.id)}
-             onDrag={e => dragStartHandler(e, deviceItem)}
-             onDragLeave={e => dragEndHandler(e)}
-             onDragEnd={e => dragLeaveHandler(e)}
-             onDragOver={e => dragOverHandler(e)}
-             onDrop={e => dragDropHandler(e, deviceItem)}
-             draggable={true}>
-            <img className={s.cardImg} src={process.env.REACT_APP_API_URL + 'devices/' + deviceItem?.img}
-                 alt={'Картинка ' + deviceItem?.name}/>
-            <p className={s.cardPrice}>{deviceItem?.price + ' ₽'}</p>
-            <a className={s.cardName}>{deviceItem?.name}</a>
-            <div className={s.cardFooter}>
-                <button className={s.button + ' ' + s.cardBasketButton}>В корзину</button>
-                <button className={s.button}>
-                    <img className={s.cardIconButton} src={likeIcon} alt="Иконака добавления в избранное"/>
-                </button>
-                <button className={s.button}>
-                    <img className={s.cardIconButton} src={analysisIcon} alt="Иконка сравнения"/>
-                </button>
+        <>
+            <div className={s.card} onClick={() => navigate(PRODUCT_ROUTE + '/' + deviceItem.id)}
+                 onDrag={e => dragStartHandler(e, deviceItem)}
+                 onDragLeave={e => dragEndHandler(e)}
+                 onDragEnd={e => dragLeaveHandler(e)}
+                 onDragOver={e => dragOverHandler(e)}
+                 onDrop={e => dragDropHandler(e, deviceItem)}
+                 draggable={true}>
+                <img className={s.cardImg} src={process.env.REACT_APP_API_URL.replace('/api', '') + '/devices/' + deviceItem?.img}
+                     alt={'Картинка ' + deviceItem?.name}/>
+                <a className={s.cardName}>{deviceItem?.name}</a>
+                <p className={s.cardPrice}>{deviceItem?.price + ' ₽'}</p>
+                <div className={s.cardFooter}>
+                    <Button>В корзину</Button>
+                    <button className={s.button} onClick={() => setIsAddModal(true)}>
+                        <img className={s.cardIconButton} src={editIcon} alt="Иконака редактирования"/>
+                    </button>
+                </div>
             </div>
-
-        </div>
+            {isAddModal && <CreateOrUpdateDevice selectedDevice={deviceItem}
+                                                 typeModal="update"
+                                                 hideModal={() => setIsAddModal(false)}/>}
+        </>
     )
 })
 

@@ -5,7 +5,7 @@ import { fetchDateOne } from "../../http/orderApi";
 export interface PaymantOrderType {
     show: boolean,
     onHide: () => void,
-    idBasketDevice: number,
+    idBasketDevice: string,
     idUser: number
 }
 

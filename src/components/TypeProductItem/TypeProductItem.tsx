@@ -21,7 +21,7 @@ const TypeProductItem: FC<TypeProductItemType> = observer(({type}) => {
     return (
         <NavLink className={s.card} onClick={() => getProductsByType(type)} to={PRODUCTS_ROUTE}>
             <img className={s.imgCard}
-                 src={`${process.env.REACT_APP_API_URL}types/${type?.img}`}
+                 src={`${process.env.REACT_APP_API_URL.replace('/api', '')}/types/${type?.img}`}
                  alt={`Картинка типа ${type?.name}`}/>
             <h1 className={s.titleCard}>{type?.name}</h1>
         </NavLink>

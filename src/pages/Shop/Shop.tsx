@@ -11,8 +11,7 @@ const Shop = observer(() => {
     const {deviceStore} = useContext(ContextApp);
     useEffect(() => {
         fetchDevices(null, deviceStore.page, deviceStore.limit).then(data => {
-            deviceStore.setDevices(data.rows);
-            deviceStore.setTotalCount(data.count);
+
         })
     }, [deviceStore.page])
 
@@ -30,7 +29,7 @@ const Shop = observer(() => {
             </form>
 
             <div className={s.products}>
-                <DeviceList/>
+                {/*<DeviceList/>*/}
                 <Pagination count={Math.ceil(deviceStore.totalCount / deviceStore.limit)}
                             color="primary"
                             onChange={changePage}

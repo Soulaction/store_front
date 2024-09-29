@@ -11,23 +11,23 @@ type ListItem = {
 export const MenuItems = () => {
 
     const menuList: ListItem[] = [{
-        name: 'Управление карточками товаров',
+        name: 'Товары',
         link: PRODUCT_EDIT_ROUTE
     }, {
-        name: 'Управление брендами',
+        name: 'Бренды',
         link: BRAND_EDIT_ROUTE
     }, {
-        name: 'Управление типами',
+        name: 'Типы',
         link: TYPE_EDIT_ROUTE
     }
     ];
 
     return (
-        <ul>
+        <ul className={s.navList}>
             {menuList.map((item) =>
                 <li key={item.link}>
                     <NavLink to={item.link}
-                             className={({isActive}) => s.itemBtn + ' ' + (isActive ? s.selectedItemBtn : '')}>
+                             className={({isActive}) => s.link + ' ' + (isActive ? s.selectedLink : '')}>
                         {item.name}</NavLink>
                 </li>)
             }

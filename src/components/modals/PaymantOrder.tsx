@@ -9,7 +9,7 @@ import { fetchProduct } from "../../http/basketApi";
 export interface PaymantOrderType {
   show: boolean,
   onHide: () => void,
-  idBasketDevice: number
+  idBasketDevice: string
 }
 
 const PaymantOrder: FC<PaymantOrderType> = observer(({ show, onHide, idBasketDevice }) => {

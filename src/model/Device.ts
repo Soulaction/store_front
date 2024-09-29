@@ -1,9 +1,12 @@
+import {DeviceInfo} from "./DeviceInfo";
+
 export interface Device {
-    id: number,
+    id: string,
     name: string,
     price: number,
-    rating: number,
-    img: number,
-    brandId: number,
-    info: any[]
+    img: string[],
+    brandId: string,
+    typeId: string,
+    total: number,
+    info: DeviceInfo[]
 }

@@ -1,19 +1,18 @@
 import {observer} from "mobx-react-lite"
-import {useContext, useState} from "react"
-import {ContextApp} from "../index"
 import DeviceItem from "./DeviceItem/DeviceItem"
-import {TypeCard} from "../model/programm-types/TypeCard";
+import {Device} from "../model/Device";
+
+interface DeviceListProps {
+    devices: Device[];
+}
 
 
-const DeviceList = observer(() => {
-    const {deviceStore} = useContext(ContextApp);
-    const [typeCard, setTypeCard] = useState<TypeCard>('card');
-    console.log('DeviceList');
+const DeviceList = observer(({devices}: DeviceListProps) => {
 
     return (
         <div>
-            {deviceStore.devices && deviceStore.devices.map(el => (
-                <DeviceItem key={el.id} deviceItem={el} type={typeCard}/>
+            {devices && devices.map(el => (
+                <DeviceItem key={el.id} deviceItem={el}/>
             ))}
         </div>
     )

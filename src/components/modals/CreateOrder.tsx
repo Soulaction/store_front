@@ -9,8 +9,8 @@ import { fetchProduct } from '../../http/basketApi'
 export interface CreateOrderType {
   show: boolean,
   onHide: () => void,
-  idBasketDevice: number,
-  idDevice: number
+  idBasketDevice: string,
+  idDevice: string
 }
 
 const CreateOrder: FC<CreateOrderType> = observer(({ show, onHide, idBasketDevice, idDevice }) => {

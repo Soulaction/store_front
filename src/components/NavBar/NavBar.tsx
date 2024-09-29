@@ -4,7 +4,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import setting from "../../assets/setting.svg";
 import basket from "../../assets/basket.svg";
-import {ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE} from "../AppRouter/consts";
+import {ADMIN_ROUTE, LOGIN_ROUTE, PRODUCT_EDIT_ROUTE, SHOP_ROUTE} from "../AppRouter/consts";
 import {Button} from "@mui/material";
 import s from './NavBar.module.css';
 
@@ -27,7 +27,7 @@ const NavBar = observer(() => {
                         <img className={s.icon} src={basket} alt="Иконка корзины"/>
                     </button>
                     <button className={s.button}
-                            onClick={() => navigate(ADMIN_ROUTE)}
+                            onClick={() => navigate(ADMIN_ROUTE + '/' + PRODUCT_EDIT_ROUTE)}
                             type="button">
                         <img className={s.icon} src={setting} alt="Иконка настроек администратора"/>
                     </button>

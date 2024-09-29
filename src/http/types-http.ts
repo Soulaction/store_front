@@ -1,16 +1,19 @@
-import {$authHost, $host} from "./index";
+import {$authHost} from "./index";
 import {Type} from "../model/Type";
+import {AxiosResponse} from "axios";
 
-export const createType = async (type: FormData): Promise<Type> => {
-    const {data} = await $authHost.post<Type>('/type', type)
-    return data
+export const createType = async (type: FormData): Promise<AxiosResponse<Type>> => {
+        return await $authHost.post('/type', type);
 }
 
-export const fetchTypes = async (): Promise<Type[]> => {
-    const {data} = await $authHost.get<Type[]>('/type')
-    return data
+export const updateType = async (type: FormData): Promise<AxiosResponse<Type>> => {
+        return await $authHost.put('/type', type);
 }
 
-export const deleteType = async (id: number): Promise<void> => {
+export const fetchTypes = async (): Promise<AxiosResponse<Type[]>> => {
+    return await $authHost.get('/type')
+}
+
+export const deleteType = async (id: string): Promise<void> => {
     await $authHost.delete<void>('/type/' + id);
 }

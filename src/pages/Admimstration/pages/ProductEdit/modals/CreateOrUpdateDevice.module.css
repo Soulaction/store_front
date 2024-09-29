@@ -1,0 +1,30 @@
+.description {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+}
+
+.descriptionTitle {
+    font-size: 14px;
+}
+
+.descriptionItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.descriptionItem:last-of-type {
+    margin-bottom: 20px;
+}
+
+.descriptionInput {
+    display: block;
+    margin: 5px;
+    width: 49%;
+}
+
+.btnAdd {
+    display: block;
+    margin-left: auto;
+}

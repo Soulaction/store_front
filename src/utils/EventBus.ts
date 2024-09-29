@@ -1,11 +1,13 @@
-export type Subscriber = () => void;
+export type Subscriber = {
+    unsubscribe: () => void
+}
 
 export class EventBus<T> {
     private listens: ((data: T) => void)[] = [];
 
     subscribe(listen: (data: T) => void): Subscriber {
         this.listens.push(listen);
-        return this.unsubscribe.bind(this);
+        return {unsubscribe: this.unsubscribe.bind(this, listen)};
     }
 
     publish(data: T): void {

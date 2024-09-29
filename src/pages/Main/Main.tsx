@@ -9,8 +9,8 @@ const Main = () => {
     const [types, setTypes] = useState<Type[]>();
 
     useEffect(() => {
-        fetchTypes().then(types => {
-            setTypes(types);
+        fetchTypes().then(({data}) => {
+            setTypes(data);
         }).catch(e => console.log(e));
     }, []);
 

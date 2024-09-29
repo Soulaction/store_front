@@ -51,28 +51,11 @@
     transition: opacity .5s;
 }
 
-.button:nth-last-of-type(2) {
-    margin-left: auto;
-}
-
 .button:hover {
     opacity: .7;
-}
-
-.cardBasketButton {
-    background-color: #bd0f2c;
-    font-size: 21px;
-    font-weight: bold;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;;
 }
 
 .cardIconButton {
     width: 30px;
     height: 30px;
-}
-
-.cardIconButton:first-of-type {
-    margin-right: 10px;
 }
