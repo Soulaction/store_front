@@ -1,13 +1,17 @@
 import React from 'react';
 import s from './Button.module.css';
 
-interface ButtonProps {
+type ButtonProps = {
     children: string;
-}
+    className: string;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({children, ...props}: ButtonProps) => {
+const Button = ({children, className, ...props}: ButtonProps) => {
+    const classes: string[] = [s.btn];
+    className && classes.push(className);
+
     return (
-        <button className={s.btn} {...props}>
+        <button className={classes.join(' ')} {...props}>
             {children}
         </button>
     );

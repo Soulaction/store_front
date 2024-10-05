@@ -1,7 +1,7 @@
 import {observer} from "mobx-react-lite";
 import React, {useEffect, useState} from "react";
-import {createDevice, updateDevice} from "../../../../../http/device-http";
-import {Button, Form, Modal, FormProps, Input, message, Select, Upload} from "antd";
+import {createDevice, fetchOneDevice, updateDevice} from "../../../../../http/device-http";
+import {Button, Form, Modal, FormProps, Input, message, Select, Upload, InputNumber} from "antd";
 import {Type} from "../../../../../model/Type";
 import {errorHandler} from "../../../../../utils/utils";
 import {Device} from "../../../../../model/Device";
@@ -13,6 +13,7 @@ import {Brand} from "../../../../../model/Brand";
 import {DownloadOutlined} from '@ant-design/icons';
 import {PlusOutlined, MinusOutlined} from '@ant-design/icons';
 import s from './CreateOrUpdateDevice.module.css';
+import {msgShare} from "../../../../../utils/share";
 
 const {Option} = Select;
 
@@ -26,21 +27,36 @@ interface CreateOrUpdateDeviceProps {
 
 const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: CreateOrUpdateDeviceProps) => {
     const [form] = Form.useForm<OmitProduct>();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [brands, setBrands] = useState<Brand[]>([]);
     const [types, setTypes] = useState<Type[]>([]);
     const [isAddModal, setIsAddModal] = useState<boolean>(true);
     const [img, setImg] = useState<UploadFile>(null);
     const [messageApi, contextHolder] = message.useMessage();
-    const [info, setInfo] = useState<DeviceInfo[]>(selectedDevice?.info ? selectedDevice.info : []);
+    const [info, setInfo] = useState<DeviceInfo[]>([]);
+    const [fullInfoDevice, setFullInfoDevice] = useState<Device>();
 
     useEffect(() => {
-        fetchBrands().then(({data}) => setBrands(data));
-        fetchTypes().then(({data}) => setTypes(data));
         if (typeModal === 'update') {
-            openUpdateModal(selectedDevice);
+            fetchOneDevice(selectedDevice.id).then(({data}) => {
+                if (!data) {
+                    msgShare.publish('Информация о устройстве не была найдена');
+                    hideModal();
+                    return;
+                }
+                openUpdateModal(data);
+                setIsOpen(true);
+                setFullInfoDevice(data);
+                setInfo(data.info);
+            });
         } else {
+            setIsOpen(true);
             openAddModal();
         }
+
+        fetchBrands().then(({data}) => setBrands(data));
+        fetchTypes().then(({data}) => setTypes(data));
+
     }, [])
 
     const addInfo = () => {
@@ -57,7 +73,7 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
     const setFormData = (type: OmitProduct) => {
         const formData = new FormData();
         if (typeModal === 'update') {
-            formData.append('id', type.id);
+            formData.append('id', fullInfoDevice.id);
         }
         formData.append('name', type.name);
         formData.append('price', `${type.price}`);
@@ -97,6 +113,7 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
 
     const openUpdateModal = (device: Device): void => {
         form.setFieldsValue({
+            id: device.id,
             name: device.name,
             price: device.price,
             brandId: device.brandId,
@@ -119,7 +136,7 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
     return (
         <>
             {contextHolder}
-            <Modal title={isAddModal ? "Добавить товар" : "Редактировать товар"} open={true} onCancel={closeForm}
+            <Modal title={isAddModal ? "Добавить товар" : "Редактировать товар"} open={isOpen} onCancel={closeForm}
                    footer="">
                 <Form form={form}
                       name="basic"
@@ -135,7 +152,7 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
                         label="Цена"
                         name="price"
                         rules={[{required: true, message: 'Заполните поле'}]}>
-                        <Input/>
+                        <InputNumber/>
                     </Form.Item>
                     <Form.Item<OmitProduct>
                         label="Бренд"
@@ -183,8 +200,12 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
                     </div>
                     {info.map(el =>
                         <div className={s.descriptionItem} key={el.id}>
-                            <Input rootClassName={s.descriptionInput} onChange={(e) => changeInfo(el.id, 'title', e.target.value)}/>
-                            <Input rootClassName={s.descriptionInput} onChange={(e) => changeInfo(el.id, 'description', e.target.value)}/>
+                            <Input rootClassName={s.descriptionInput}
+                                   value={el.title}
+                                   onChange={(e) => changeInfo(el.id, 'title', e.target.value)}/>
+                            <Input rootClassName={s.descriptionInput}
+                                   value={el.description}
+                                   onChange={(e) => changeInfo(el.id, 'description', e.target.value)}/>
                             <Button className={s.btnAdd}
                                     icon={<MinusOutlined/>}
                                     type="primary"

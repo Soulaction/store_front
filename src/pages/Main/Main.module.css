@@ -1,9 +1,8 @@
 .container {
     margin: 25px auto 0;
     display: grid;
-    max-width: 1200px;
     width: 100%;
     gap: 10px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 270px));
     justify-content: center;
 }

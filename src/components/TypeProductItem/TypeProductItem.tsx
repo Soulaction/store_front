@@ -1,7 +1,7 @@
 import {FC, useContext} from "react";
 import {Type} from "../../model/Type";
 import {NavLink} from 'react-router-dom'
-import s from './typeProductItem.module.css'
+import s from './TypeProductItem.module.css'
 import {ContextApp} from "../../index";
 import {PRODUCTS_ROUTE} from "../AppRouter/consts";
 import {observer} from "mobx-react-lite";

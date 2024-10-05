@@ -1,4 +1,35 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
 .btnAdd {
     display: block;
     margin-left: auto;
+}
+
+.listType {
+    display: flex;
+    margin: 20px 0;
+    gap: 5px
+}
+
+.btnType {
+    margin: 0;
+    padding: 5px 10px;
+    border: none;
+    color: #fff;
+    background: #1677ff;
+    opacity: .7;
+    border-radius: 5px;
+}
+
+.btnTypeActive {
+    opacity: 1;
+}
+
+.notFoundText {
+    margin: auto;
+    color: grey;
 }

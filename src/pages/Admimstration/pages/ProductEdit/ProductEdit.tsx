@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import s from "../TypeEdit/TypeEdit.module.css";
-import {Add} from "@mui/icons-material";
+import s from "./ProductEdit.module.css";
+import { PlusOutlined } from '@ant-design/icons';
 import {Button, Pagination} from "antd";
 import {fetchDevices} from "../../../../http/device-http";
 import CreateOrUpdateDevice from "./modals/CreateOrUpdateDevice";
-import DeviceList from "../../../../components/DeviceList";
+import DeviceList from "../../../../components/DeviceList/DeviceList";
 import {fetchTypes} from "../../../../http/types-http";
 import {Type} from "../../../../model/Type";
 import {Device} from "../../../../model/Device";
 
 export const ProductEdit = () => {
-    const [isAddModal, setIsAddModal] = useState<boolean>();
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [typeModal, setTypeModal] = useState<'add' | 'update'>();
     const [selectedTypeId, setSelectedTypeId] = useState<string | null>(null);
     const [types, setTypes] = useState<Type[]>([]);
     const [devices, setDevices] = useState<Device[]>([]);
@@ -35,26 +36,47 @@ export const ProductEdit = () => {
             });
     }
 
-    const changePage = (page) => {
-        console.log(page);
+    const refreshData = () => {
         getProduct(selectedTypeId, 1, 10);
+        setIsOpenModal(false);
+    }
+
+    const openAddModel = (): void => {
+        setIsOpenModal(true);
+        setTypeModal('add');
+    }
+
+    const changePage = (page) => {
+        getProduct(selectedTypeId, page, 10);
     }
 
     return (
-        <div>
+        <div className={s.main}>
             <Button className={s.btnAdd}
-                    icon={<Add/>}
+                    icon={<PlusOutlined/>}
                     type="primary"
-                    onClick={() => setIsAddModal(true)}/>
-            {types.map(type => <button onClick={() => setSelectedTypeId(type.id)}>{type.name}</button>)}
-            <DeviceList devices={devices}/>
-            <Pagination showSizeChanger
-                        locale={{items_per_page: ''}}
-                        onChange={changePage}
-                        defaultCurrent={1}
-                        total={100}/>
-            {isAddModal && <CreateOrUpdateDevice typeModal="add"
-                                                 hideModal={() => setIsAddModal(false)}/>}
+                    onClick={openAddModel}/>
+            <div className={s.listType}>
+                {types.map(type =>
+                    <button key={type.id}
+                            className={s.btnType + ' ' + (type.id === selectedTypeId && s.btnTypeActive)}
+                            onClick={() => setSelectedTypeId(type.id)}>
+                        {type.name}
+                    </button>)
+                }
+            </div>
+            {!!devices.length ?
+                <DeviceList devices={devices} isAdmin={true}/>
+                :
+                <h2 className={s.notFoundText}>Нет записей</h2>
+            }
+            {devices.length > 10 && <Pagination locale={{items_per_page: ''}}
+                                                onChange={changePage}
+                                                defaultCurrent={1}
+                                                total={allPage}/>
+            }
+            {isOpenModal && <CreateOrUpdateDevice typeModal={typeModal}
+                                                  hideModal={refreshData}/>}
         </div>
     );
 };

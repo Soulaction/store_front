@@ -1,20 +1,27 @@
 import {observer} from "mobx-react-lite"
-import React, {FC, useState} from "react"
+import React, {FC, SyntheticEvent, useState} from "react"
 import {PRODUCT_ROUTE} from "../AppRouter/consts";
-import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Device} from "model/Device";
 import s from "./DeviceItem.module.css";
 import editIcon from '../../assets/edit.svg';
+import trashIcon from '../../assets/trash.svg';
 import Button from "../Button/Button";
 import CreateOrUpdateDevice from "../../pages/Admimstration/pages/ProductEdit/modals/CreateOrUpdateDevice";
+import {deleteDevice} from "../../http/device-http";
+import {message, Popconfirm} from "antd";
+import {errorHandler} from "../../utils/utils";
+import {addBasket} from "../../http/basket-http";
+import {BasketItem} from "../../model/BasketItem";
 
 export interface DeviceItemProps {
-    deviceItem: Device
+    deviceItem: Device;
+    isAdmin: boolean;
 }
 
-const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
-    const navigate = useNavigate();
-    const [isAddModal, setIsAddModal] = useState<boolean>(false);
+const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
+    const [isEditModal, setIsEditModal] = useState<boolean>(false);
+    const [messageApi, contextHolder] = message.useMessage();
 
     function dragStartHandler(e, device) {
 
@@ -36,29 +43,63 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem}) => {
 
     }
 
+    const addProductInBasket = (deviceId: string) : void => {
+        const productBasket: BasketItem = {
+            deviceId,
+            basketId: 'e2196ee5-b2de-41dd-a941-c4d5a653bc4f'
+        };
+        addBasket(productBasket).then(() => {
+            messageApi.success('Товар добавлен в корзину');
+        }).catch(errorHandler)
+    }
+
+    const openEditModel = (): void => {
+        setIsEditModal(true);
+    }
+
+    const deleteProduct = async (id: string): Promise<void> => {
+        await deleteDevice(id).then(() => {
+            messageApi.success('Товар удалён');
+        }).catch(errorHandler);
+    }
+
     return (
         <>
-            <div className={s.card} onClick={() => navigate(PRODUCT_ROUTE + '/' + deviceItem.id)}
+            {contextHolder}
+            <div className={s.card}
                  onDrag={e => dragStartHandler(e, deviceItem)}
                  onDragLeave={e => dragEndHandler(e)}
                  onDragEnd={e => dragLeaveHandler(e)}
                  onDragOver={e => dragOverHandler(e)}
                  onDrop={e => dragDropHandler(e, deviceItem)}
                  draggable={true}>
-                <img className={s.cardImg} src={process.env.REACT_APP_API_URL.replace('/api', '') + '/devices/' + deviceItem?.img}
+                <img className={s.cardImg}
+                     src={process.env.REACT_APP_API_URL.replace('/api', '') + '/devices/' + deviceItem?.img}
                      alt={'Картинка ' + deviceItem?.name}/>
-                <a className={s.cardName}>{deviceItem?.name}</a>
+                <Link className={s.cardName} to={PRODUCT_ROUTE + '/' + deviceItem.id}>{deviceItem?.name}</Link>
                 <p className={s.cardPrice}>{deviceItem?.price + ' ₽'}</p>
-                <div className={s.cardFooter}>
-                    <Button>В корзину</Button>
-                    <button className={s.button} onClick={() => setIsAddModal(true)}>
-                        <img className={s.cardIconButton} src={editIcon} alt="Иконака редактирования"/>
-                    </button>
-                </div>
+                {isAdmin ?
+                    <div className={s.adminBtns}>
+                        <button className={s.button} onClick={() => openEditModel()}>
+                            <img className={s.cardIconButton} src={editIcon} alt="Иконака редактирования"/>
+                        </button>
+                        <Popconfirm
+                            title="Удалить запись"
+                            onConfirm={() => deleteProduct(deviceItem.id)}
+                            okText="Да"
+                            cancelText="Нет">
+                            <button className={s.button}>
+                                <img className={s.cardIconButton} src={trashIcon} alt="Иконака удаления"/>
+                            </button>
+                        </Popconfirm>
+                    </div>
+                    :
+                    <Button className={s.btnBasket} onClick={() => addProductInBasket(deviceItem.id)}>В корзину</Button>
+                }
             </div>
-            {isAddModal && <CreateOrUpdateDevice selectedDevice={deviceItem}
-                                                 typeModal="update"
-                                                 hideModal={() => setIsAddModal(false)}/>}
+            {isEditModal && <CreateOrUpdateDevice selectedDevice={deviceItem}
+                                                  typeModal="update"
+                                                  hideModal={() => setIsEditModal(false)}/>}
         </>
     )
 })

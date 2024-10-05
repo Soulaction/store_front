@@ -1,17 +1,19 @@
 import {observer} from "mobx-react-lite";
-import {ChangeEvent, useContext, useEffect} from "react";
+import {ChangeEvent, useContext, useEffect, useState} from "react";
 import {ContextApp} from "../../index";
-import DeviceList from "../../components/DeviceList";
+import DeviceList from "../../components/DeviceList/DeviceList";
 import {fetchDevices} from "../../http/device-http";
-import {Pagination} from "@mui/material";
 import s from './Shop.module.css';
-import './Shop.css';
+import {Device} from "../../model/Device";
 
 const Shop = observer(() => {
-    const {deviceStore} = useContext(ContextApp);
-    useEffect(() => {
-        fetchDevices(null, deviceStore.page, deviceStore.limit).then(data => {
+    const {deviceStore, typesStore} = useContext(ContextApp);
+    const [devices, setDevices] = useState<Device[]>([]);
 
+    useEffect(() => {
+        console.log(typesStore);
+        fetchDevices(typesStore.selectedType.id, deviceStore.page, deviceStore.limit).then(({data}) => {
+            setDevices(data.rows);
         })
     }, [deviceStore.page])
 
@@ -21,20 +23,9 @@ const Shop = observer(() => {
 
     return (
         <main className={s.main}>
-            <form className={s.form}>
-                <label>Цена</label>
-                <input name="price"
-                       type="number"
-                       placeholder="Цена"/>
-            </form>
 
             <div className={s.products}>
-                {/*<DeviceList/>*/}
-                <Pagination count={Math.ceil(deviceStore.totalCount / deviceStore.limit)}
-                            color="primary"
-                            onChange={changePage}
-                            showFirstButton
-                            showLastButton/>
+                <DeviceList devices={devices} isAdmin={false}/>
             </div>
         </main>
     )

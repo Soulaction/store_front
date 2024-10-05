@@ -1,5 +1,5 @@
 import Auth from "../../pages/Auth"
-import Basket from "../../pages/Basket"
+import Basket from "../../pages/Basket/Basket"
 import DevicePage from "../../pages/DevicePage"
 import Shop from "../../pages/Shop/Shop"
 import Keeper from "../../pages/Keeper"
@@ -31,7 +31,7 @@ type RouteType = {
 
 export const authRoutes: RouteType[] = [
     {
-        path: BASKET_ROUTE + '/:id',
+        path: BASKET_ROUTE,
         Component: Basket
     },
     {

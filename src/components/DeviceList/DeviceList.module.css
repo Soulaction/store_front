@@ -1,0 +1,6 @@
+.devices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 290px));
+    justify-content: center;
+    gap: 20px;
+}

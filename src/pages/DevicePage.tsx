@@ -1,11 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import { Card, Col, Container, Image, Row, Button } from "react-bootstrap";
-import { useParams } from 'react-router-dom'
-import { fetchOneDevice } from "../http/device-http";
-import { ContextApp } from "../index";
-import { createProduct } from "../http/basketApi";
-import { observer } from "mobx-react-lite";
-import {Device} from "../model/Device";
+import {useContext, useEffect} from "react";
+import {Container} from "react-bootstrap";
+import {useParams} from 'react-router-dom'
+import {ContextApp} from "../index";
+import {observer} from "mobx-react-lite";
 
 
 const DevicePage = observer(() => {

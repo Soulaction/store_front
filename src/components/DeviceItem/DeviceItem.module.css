@@ -1,33 +1,42 @@
 .card {
     display: flex;
     flex-direction: column;
-    max-width: 210px;
+    max-width: 290px;
     width: 100%;
-    min-height: 350px;
+    box-shadow: 0 2px 8px 0 #00000026;
+    border-radius: 10px;
 }
 
 .cardImg {
     display: block;
+    margin: 20px auto;
     object-fit: cover;
-    min-height: 230px;
-    padding: 0 10px;
+    max-width: 267px;
+    width: 100%;
+    max-height: 170px;
+    height: 100%;
 }
 
 .cardPrice {
-    margin: 5px 0 0;
+    margin: 5px 15px;
     padding: 0;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FB0F40;
 }
 
 .cardName {
     display: inline-block;
-    font-size: 20px;
+    font-size: 17px;
+    line-height: 20px;
     font-weight: 600;
     text-decoration: none;
     color: black;
-    margin: 10px 0 0;
+    margin: 5px 15px;
     padding: 0;
+    max-height: 42px;
+    height: 100%;
 }
 
 .cardName:hover {
@@ -35,10 +44,14 @@
     color: #bd0f2c;
 }
 
-.cardFooter {
+.btnBasket {
+    margin: 15px;
+}
+
+.adminBtns {
     display: flex;
-    margin-top: 15px;
-    width: 100%;
+    justify-content: space-between;
+    margin: 15px;
 }
 
 .button {

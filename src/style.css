@@ -16,3 +16,7 @@ main {
     max-width: 350px;
     margin-left: auto;
 }
+
+:where(.css-dev-only-do-not-override-1gwfwyx).ant-input-number-outlined {
+    width: 100%;
+}

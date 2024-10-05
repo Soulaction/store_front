@@ -1,5 +1,4 @@
 import {Button, Card, Container, Row, Table} from 'react-bootstrap'
-import ChangeStatus from '../components/modals/ChangeStatus'
 import {useContext, useEffect, useState} from 'react';
 import {ContextApp} from '../index';
 import {fetchOneOrders, fetchOrders, fetchPaymantOrders, fetchSendOrders} from '../http/orderApi'
@@ -76,9 +75,6 @@ const Keeper = observer (() => {
                         onClick={() => setStatusVisible(true)}>
                         Изменить статус
                     </Button>
-
-                    <ChangeStatus show={changeStatusVisible} onHide={() => setStatusVisible(false)} />
-
             </Row>
         </Container>
     )
