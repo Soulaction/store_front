@@ -3,7 +3,7 @@ import s from './Button.module.css';
 
 type ButtonProps = {
     children: string;
-    className: string;
+    className?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({children, className, ...props}: ButtonProps) => {

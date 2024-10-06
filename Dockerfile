@@ -1,10 +1,6 @@
-FROM node:20-alpine
-
+FROM node:12-alpine as builder
 WORKDIR /app
-
-COPY . ./
+COPY package.json /app/package.json
 RUN npm install
-
-EXPOSE 3000
-
-CMD npm start
+COPY . /app
+RUN npm run build

@@ -70,16 +70,16 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
         setInfo(info.map(i => i.id === id ? {...i, [key]: value} : i));
     }
 
-    const setFormData = (type: OmitProduct) => {
+    const setFormData = (device: OmitProduct) => {
         const formData = new FormData();
         if (typeModal === 'update') {
             formData.append('id', fullInfoDevice.id);
         }
-        formData.append('name', type.name);
-        formData.append('price', `${type.price}`);
+        formData.append('name', device.name);
+        formData.append('price', `${device.price}`);
         formData.append('img', img as unknown as File);
-        formData.append('brandId', type.brandId);
-        formData.append('typeId', type.typeId);
+        formData.append('brandId', device.brandId);
+        formData.append('typeId', device.typeId);
         formData.append('info', JSON.stringify(info));
         return formData;
     }
@@ -93,7 +93,7 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
             .catch(errorHandler)
     };
 
-    const refreshProduct: FormProps<OmitProduct>['onFinish'] = (values): void => {
+    const updateProduct: FormProps<OmitProduct>['onFinish'] = (values): void => {
         updateDevice(setFormData(values))
             .then(() => {
                 messageApi.success('Товар обновлён');
@@ -140,7 +140,7 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
                    footer="">
                 <Form form={form}
                       name="basic"
-                      onFinish={isAddModal ? addProduct : refreshProduct}
+                      onFinish={isAddModal ? addProduct : updateProduct}
                       autoComplete="off">
                     <Form.Item<OmitProduct>
                         label="Наименование"

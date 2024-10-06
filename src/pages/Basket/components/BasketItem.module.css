@@ -1,0 +1,50 @@
+.item {
+    display: flex;
+    padding: 10px 10px 25px;
+    align-items: center;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.cardImg {
+    display: block;
+    object-fit: cover;
+    max-width: 120px;
+    width: 100%;
+    height: 120px;
+}
+
+.cardName {
+    margin: 0 0 0 54px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: left;
+}
+
+.btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transition: transform .3s linear;
+}
+
+.btn:hover {
+    transform: scale(1.2);
+}
+
+.iconTrash {
+    display: block;
+    height: 24px;
+}
+
+.cardPrice {
+    display: block;
+    margin: 0 15px 0 auto;
+    padding: 0;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FB0F40;
+}

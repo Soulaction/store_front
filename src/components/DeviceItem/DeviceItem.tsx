@@ -12,7 +12,7 @@ import {deleteDevice} from "../../http/device-http";
 import {message, Popconfirm} from "antd";
 import {errorHandler} from "../../utils/utils";
 import {addBasket} from "../../http/basket-http";
-import {BasketItem} from "../../model/BasketItem";
+import {BasketItemModel} from "../../model/BasketItemModel";
 
 export interface DeviceItemProps {
     deviceItem: Device;
@@ -44,7 +44,7 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
     }
 
     const addProductInBasket = (deviceId: string) : void => {
-        const productBasket: BasketItem = {
+        const productBasket: BasketItemModel = {
             deviceId,
             basketId: 'e2196ee5-b2de-41dd-a941-c4d5a653bc4f'
         };

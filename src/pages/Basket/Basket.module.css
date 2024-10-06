@@ -1,0 +1,48 @@
+.basket {
+    display: flex;
+    flex-direction: column;
+}
+
+.basketHeader {
+    margin: 25px 0 0;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+}
+
+.listItems {
+    list-style-type: none;
+    margin: 52px 0 0;
+    padding: 0;
+}
+
+.msgEmpty {
+    margin: 55px auto 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: center;
+}
+
+.sumPrice {
+    padding: 0;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FB0F40;
+}
+
+.sumName {
+    margin: 25px 0 0 auto;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 31px;
+    text-align: left;
+}
+
+.basketBtn {
+    margin-top: 25px;
+    align-self: center;
+}
