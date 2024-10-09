@@ -1,6 +1,6 @@
 import Auth from "../../pages/Auth"
 import Basket from "../../pages/Basket/Basket"
-import DevicePage from "../../pages/DevicePage"
+import DevicePage from "../../pages/DevicePage/DevicePage"
 import Shop from "../../pages/Shop/Shop"
 import Keeper from "../../pages/Keeper"
 import {

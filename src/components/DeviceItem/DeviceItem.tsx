@@ -43,7 +43,7 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
 
     }
 
-    const addProductInBasket = (deviceId: string) : void => {
+    const addProductInBasket = (deviceId: string): void => {
         const productBasket: BasketItemModel = {
             deviceId,
             basketId: 'e2196ee5-b2de-41dd-a941-c4d5a653bc4f'
@@ -76,7 +76,11 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
                 <img className={s.cardImg}
                      src={process.env.REACT_APP_API_URL.replace('/api', '') + '/devices/' + deviceItem?.img}
                      alt={'Картинка ' + deviceItem?.name}/>
-                <Link className={s.cardName} to={PRODUCT_ROUTE + '/' + deviceItem.id}>{deviceItem?.name}</Link>
+                <Link className={s.cardName}
+                      to={PRODUCT_ROUTE + '/' + deviceItem.id}
+                      state={{isAddProduct: true}}>
+                    {deviceItem?.name}
+                </Link>
                 <p className={s.cardPrice}>{deviceItem?.price + ' ₽'}</p>
                 {isAdmin ?
                     <div className={s.adminBtns}>

@@ -8,6 +8,7 @@ import DeviceList from "../../../../components/DeviceList/DeviceList";
 import {fetchTypes} from "../../../../http/types-http";
 import {Type} from "../../../../model/Type";
 import {Device} from "../../../../model/Device";
+import {FilterData} from "../../../../model/programm-types/FilterData";
 
 export const ProductEdit = () => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
@@ -29,7 +30,8 @@ export const ProductEdit = () => {
     }, [selectedTypeId])
 
     const getProduct = (typeId: string, page: number, limit: number): void => {
-        fetchDevices(typeId, page, limit)
+        const filterData: FilterData = {typeId, page, limit};
+        fetchDevices(filterData)
             .then(({data}) => {
                 setDevices(data.rows);
                 setAllPage(data.count);

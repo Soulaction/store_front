@@ -5,14 +5,20 @@ import DeviceList from "../../components/DeviceList/DeviceList";
 import {fetchDevices} from "../../http/device-http";
 import s from './Shop.module.css';
 import {Device} from "../../model/Device";
+import {FilterData} from "../../model/programm-types/FilterData";
+import FilterProduct from "./components/FilterProduct/FilterProduct";
 
 const Shop = observer(() => {
     const {deviceStore, typesStore} = useContext(ContextApp);
     const [devices, setDevices] = useState<Device[]>([]);
 
     useEffect(() => {
-        console.log(typesStore);
-        fetchDevices(typesStore.selectedType.id, deviceStore.page, deviceStore.limit).then(({data}) => {
+        const filterData: FilterData = {
+            typeId: typesStore.selectedType.id,
+            page: deviceStore.page,
+            limit: deviceStore.limit
+        };
+        fetchDevices(filterData).then(({data}) => {
             setDevices(data.rows);
         })
     }, [deviceStore.page])
@@ -23,7 +29,7 @@ const Shop = observer(() => {
 
     return (
         <main className={s.main}>
-
+            <FilterProduct/>
             <div className={s.products}>
                 <DeviceList devices={devices} isAdmin={false}/>
             </div>
