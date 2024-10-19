@@ -1,4 +1,3 @@
-import {observer} from "mobx-react-lite"
 import DeviceItem from "../DeviceItem/DeviceItem"
 import {Device} from "../../model/Device";
 import s from './DeviceList.module.css'
@@ -9,7 +8,7 @@ interface DeviceListProps {
 }
 
 
-const DeviceList = observer(({devices, isAdmin}: DeviceListProps) => {
+const DeviceList = ({devices, isAdmin}: DeviceListProps) => {
 
     return (
         <div className={s.devices}>
@@ -20,6 +19,6 @@ const DeviceList = observer(({devices, isAdmin}: DeviceListProps) => {
             ))}
         </div>
     )
-})
+}
 
 export default DeviceList;

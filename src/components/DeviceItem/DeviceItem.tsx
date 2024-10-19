@@ -1,5 +1,4 @@
-import {observer} from "mobx-react-lite"
-import React, {FC, SyntheticEvent, useState} from "react"
+import React, {FC, useState} from "react"
 import {PRODUCT_ROUTE} from "../AppRouter/consts";
 import {Link} from "react-router-dom";
 import {Device} from "model/Device";
@@ -11,15 +10,14 @@ import CreateOrUpdateDevice from "../../pages/Admimstration/pages/ProductEdit/mo
 import {deleteDevice} from "../../http/device-http";
 import {message, Popconfirm} from "antd";
 import {errorHandler} from "../../utils/utils";
-import {addBasket} from "../../http/basket-http";
-import {BasketItemModel} from "../../model/BasketItemModel";
+import {addBasket, DataBasket} from "../../http/basket-http";
 
 export interface DeviceItemProps {
     deviceItem: Device;
     isAdmin: boolean;
 }
 
-const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
+const DeviceItem: FC<DeviceItemProps> = ({deviceItem, isAdmin}) => {
     const [isEditModal, setIsEditModal] = useState<boolean>(false);
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -44,9 +42,9 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
     }
 
     const addProductInBasket = (deviceId: string): void => {
-        const productBasket: BasketItemModel = {
-            deviceId,
-            basketId: 'e2196ee5-b2de-41dd-a941-c4d5a653bc4f'
+        const productBasket: DataBasket = {
+            id: deviceId,
+            idBasketItem: 'e2196ee5-b2de-41dd-a941-c4d5a653bc4f'
         };
         addBasket(productBasket).then(() => {
             messageApi.success('Товар добавлен в корзину');
@@ -78,7 +76,7 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
                      alt={'Картинка ' + deviceItem?.name}/>
                 <Link className={s.cardName}
                       to={PRODUCT_ROUTE + '/' + deviceItem.id}
-                      state={{isAddProduct: true}}>
+                      state={{idBasketItem: null}}>
                     {deviceItem?.name}
                 </Link>
                 <p className={s.cardPrice}>{deviceItem?.price + ' ₽'}</p>
@@ -106,6 +104,6 @@ const DeviceItem: FC<DeviceItemProps> = observer(({deviceItem, isAdmin}) => {
                                                   hideModal={() => setIsEditModal(false)}/>}
         </>
     )
-})
+}
 
 export default DeviceItem;

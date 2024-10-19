@@ -1,19 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {useLocation, useParams} from 'react-router-dom'
-import {observer} from "mobx-react-lite";
+import {useLocation, useNavigate, useParams} from 'react-router-dom'
 import {fetchOneDevice} from "../../http/device-http";
 import {Device} from "../../model/Device";
 import {errorHandler} from "../../utils/utils";
 import s from './DevicePage.module.css';
 import Button from "../../components/Button/Button";
 import {message} from "antd";
-import {addBasket, deleteBasket} from "../../http/basket-http";
-import {BasketItemModel} from "../../model/BasketItemModel";
+import {useAppDispatch} from "../../feature/hooks/hooks";
+import {addBasketItems, deleteBasketItems} from "../../feature/basket/basketThunk";
 
 
-const DevicePage = observer(() => {
+const DevicePage = () => {
     const {id} = useParams();
-    const {state: {isAddProduct}} = useLocation();
+    let {state: {idBasketItem}} = useLocation();
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const [idItemBasket, setIdItemBasket] = useState<string | null>(idBasketItem);
     const [device, setDevice] = useState<Partial<Device>>({info: []});
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -23,20 +25,19 @@ const DevicePage = observer(() => {
             .catch(errorHandler)
     }, [])
 
-    const addInBasket = (deviceId: string) => {
-        const newItemFromBasket: BasketItemModel = {
-            basketId: 'e2196ee5-b2de-41dd-a941-c4d5a653bc4f',
-            deviceId
-        }
-        addBasket(newItemFromBasket).then(() => {
-            messageApi.success('Товар добавлен в корзину');
-        }).catch(errorHandler);
+    const addInBasket = async (deviceId: string) => {
+        await dispatch(addBasketItems(deviceId)).unwrap()
+        messageApi.success('Товар добавлен в корзину');
     }
 
-    const deleteFromBasket = (deviceId: string) => {
-        deleteBasket(deviceId).then(() => {
-            messageApi.success('Товар удалён из корзины');
-        }).catch(errorHandler);
+    const deleteFromBasket = async (deviceId: string) => {
+        await dispatch(deleteBasketItems(deviceId)).unwrap()
+        messageApi.success('Товар удалён из корзины');
+        setIdItemBasket(null);
+    }
+
+    if (!device.id) {
+        return <></>;
     }
 
     return (
@@ -50,23 +51,26 @@ const DevicePage = observer(() => {
                 <div className={s.descriptionBlock}>
                     <h2 className={s.descriptionTitle}>Характеристики</h2>
                     <ul className={s.descriptionList}>
-                        {device.info.map(item =>
-                            <li className={s.descriptionItem} key={item.id}>{`${item.title}: `} <span
-                                className={s.descriptionText}>{item.description}</span></li>
-                        )}
+                        {device.info.length ? device.info.map(item =>
+                                <li className={s.descriptionItem} key={item.id}>{`${item.title}: `} <span
+                                    className={s.descriptionText}>{item.description}</span></li>
+                            )
+                            :
+                            <h3 className={s.descriptionEmpty}>У товара нет характеристик</h3>
+                        }
                     </ul>
                 </div>
                 <div className={s.dopInfo}>
                     <p className={s.cardPrice}>{device.price + ' ₽'}</p>
-                    {isAddProduct ?
-                        <Button onClick={() => addInBasket(device.id)}>Добавить в корзину</Button>
+                    {idItemBasket ?
+                        <Button onClick={() => deleteFromBasket(idItemBasket)}>Удалить из корзины</Button>
                         :
-                        <Button onClick={() => deleteFromBasket(device.id)}>Удалить из корзины</Button>
+                        <Button onClick={() => addInBasket(device.id)}>Добавить в корзину</Button>
                     }
                 </div>
             </div>
         </main>
     )
-})
+};
 
 export default DevicePage;

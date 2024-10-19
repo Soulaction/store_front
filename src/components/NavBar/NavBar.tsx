@@ -1,15 +1,14 @@
-import React, {useContext} from "react";
-import {ContextApp} from "../../index";
+import React from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import {observer} from "mobx-react-lite";
 import setting from "../../assets/setting.svg";
 import basket from "../../assets/basket.svg";
 import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, PRODUCT_EDIT_ROUTE, SHOP_ROUTE} from "../AppRouter/consts";
 import s from './NavBar.module.css';
 
 
-const NavBar = observer(() => {
-    const {userStore} = useContext(ContextApp);
+const NavBar = () => {
+    // const {userStore} = useContext(ContextApp);
+    const userStore = {isAuth: true, setIsUser: (data) => {}, setIsAuth: (data) => {} }
     const navigate = useNavigate()
 
     const logOut = () => {
@@ -42,6 +41,6 @@ const NavBar = observer(() => {
             }
         </header>
     )
-})
+}
 
 export default NavBar;

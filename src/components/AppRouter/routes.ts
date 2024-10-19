@@ -65,7 +65,7 @@ export const publicRoutes = [
         Component: Main
     },
     {
-        path: PRODUCTS_ROUTE,
+        path: PRODUCTS_ROUTE + '/:idType',
         Component: Shop
     },
     {

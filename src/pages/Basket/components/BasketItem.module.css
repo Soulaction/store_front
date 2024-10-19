@@ -15,10 +15,12 @@
 
 .cardName {
     margin: 0 0 0 54px;
+    width: 100%;
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
     text-align: left;
+    cursor: pointer;
 }
 
 .btn {
@@ -41,6 +43,7 @@
 
 .cardPrice {
     display: block;
+    white-space: nowrap;
     margin: 0 15px 0 auto;
     padding: 0;
     font-weight: bold;

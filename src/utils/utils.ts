@@ -1,21 +1,32 @@
 import {msgShare} from "./share";
-export const errorHandler = (error) => {
+
+export const errorHandler = (error): string => {
     const errorInfo = error.response?.data;
-    if(!errorInfo) {
-        return;
+    if (!errorInfo) {
+        return '';
     }
+    let errorMsg = '';
     if (errorInfo instanceof Object) {
-        msgShare.publish((errorInfo as Error).message);
+        errorMsg = (errorInfo as Error).message;
+        msgShare.publish(errorMsg);
     } else {
         const status: number = error.response.status;
         if (status === 400) {
-            msgShare.publish('Ошибка запроса');
+            errorMsg = 'Ошибка запроса';
+            msgShare.publish(errorMsg);
+
         } else if (status === 404) {
-            msgShare.publish('Метод не найден');
+            errorMsg = 'Метод не найден';
+            msgShare.publish(errorMsg);
+
         } else if (status === 500) {
-            msgShare.publish('Ошибка сервера');
+            errorMsg = 'Ошибка сервера';
+            msgShare.publish(errorMsg);
+
         } else {
-            msgShare.publish('Неизвестная ошибка');
+            errorMsg = 'Неизвестная ошибка';
+            msgShare.publish(errorMsg);
         }
     }
+    return errorMsg;
 }

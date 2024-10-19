@@ -1,4 +1,3 @@
-import {observer} from "mobx-react-lite";
 import React, {useEffect, useState} from "react";
 import {createDevice, fetchOneDevice, updateDevice} from "../../../../../http/device-http";
 import {Button, Form, Modal, FormProps, Input, message, Select, Upload, InputNumber} from "antd";
@@ -25,7 +24,7 @@ interface CreateOrUpdateDeviceProps {
     selectedDevice?: Device;
 }
 
-const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: CreateOrUpdateDeviceProps) => {
+const CreateOrUpdateDevice = ({selectedDevice, typeModal, hideModal}: CreateOrUpdateDeviceProps) => {
     const [form] = Form.useForm<OmitProduct>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [brands, setBrands] = useState<Brand[]>([]);
@@ -226,7 +225,7 @@ const CreateOrUpdateDevice = observer(({selectedDevice, typeModal, hideModal}: C
         </>
 
     )
-})
+};
 
 export default CreateOrUpdateDevice;
 

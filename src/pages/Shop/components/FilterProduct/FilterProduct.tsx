@@ -1,50 +1,50 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form, FormProps, Input, InputNumber, Select} from "antd";
-import {fetchDevices} from "../../../../http/device-http";
 import {errorHandler} from "../../../../utils/utils";
 import {fetchBrands} from "../../../../http/brands-http";
 import {Brand} from "../../../../model/Brand";
 import {FilterData} from "../../../../model/programm-types/FilterData";
+import {setFilterData} from "../../../../feature/device/deviceSlice";
+import {useAppDispatch, useAppSelector} from "../../../../feature/hooks/hooks";
 
 const {Option} = Select;
 
 const FilterProduct = () => {
     const [form] = Form.useForm<FilterData>();
     const [brands, setBrands] = useState<Brand[]>([]);
+    const filterData: FilterData = useAppSelector(state => state.device.filterData)
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         fetchBrands().then(({data}) => {
             setBrands(data);
         }).catch(errorHandler)
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        form.setFieldsValue({
+            typeId: filterData.typeId,
+            brandId: filterData.brandId,
+            price: filterData.price,
+            name: filterData.name,
+            page: filterData.page,
+            limit: filterData.limit
+        });
+    }, [filterData])
 
     const search: FormProps<FilterData>['onFinish'] = (values): void => {
-        const filterData: FilterData = {
-            typeId: '67ab7fe7-4719-4726-8d32-0d0f8ebfa7f5',
+        const newFilterData: FilterData = {
+            typeId: filterData.typeId,
             brandId: values.brandId,
             price: values.price,
             name: values.name,
             page: 1,
             limit: 10
         };
-        getProduct(filterData);
+        dispatch(setFilterData(newFilterData));
     };
 
-    const getProduct = (filterData: FilterData) => {
-        fetchDevices(filterData)
-            .then(({data}) => {
-                console.log(data);
-            })
-            .catch(errorHandler)
-    }
-
     const reset = () => {
-        const filterData: FilterData = {
-            typeId: '67ab7fe7-4719-4726-8d32-0d0f8ebfa7f5',
-            page: 1,
-            limit: 10
-        };
-        getProduct(filterData);
         form.resetFields();
     }
 

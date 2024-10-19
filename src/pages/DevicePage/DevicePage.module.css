@@ -35,6 +35,15 @@
     color: #2A1F20;
 }
 
+.descriptionEmpty {
+    margin: 25px auto 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: center;
+}
+
 .descriptionList {
     margin: 15px 0 0;
     padding: 0;

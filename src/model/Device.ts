@@ -1,6 +1,6 @@
 import {DeviceInfo} from "./DeviceInfo";
 
-export interface Device {
+export type Device = {
     id: string,
     name: string,
     price: number,

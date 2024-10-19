@@ -1,30 +1,29 @@
-import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
-import {fetchBasketProduct} from "../../http/basket-http";
-import {errorHandler} from "../../utils/utils";
 import BasketItem from "./components/BasketItem";
 import {BasketItemModel} from "../../model/BasketItemModel";
 import s from "./Basket.module.css";
 import Button from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
 import {PRODUCTS_ROUTE} from "../../components/AppRouter/consts";
+import {useAppDispatch, useAppSelector} from "../../feature/hooks/hooks";
+import {fetchBasketItems} from "../../feature/basket/basketThunk";
 
-const Basket = observer(() => {
+const Basket = () => {
 
-    const [basketItems, setBasketItems] = useState<BasketItemModel[]>([]);
     const [sum, setSum] = useState<number>(0);
     const navigate = useNavigate();
-
+    const basketItems: BasketItemModel[] = useAppSelector(state => state.basket.basketItems);
+    const dispatch = useAppDispatch();
     useEffect(() => {
         refreshData();
+        },[])
 
-    }, [])
+    useEffect(() => {
+        setSum(basketItems.reduce((sum, el) => sum + el.price, 0));
+    }, [basketItems])
 
     const refreshData = () => {
-        fetchBasketProduct('e2196ee5-b2de-41dd-a941-c4d5a653bc4f').then(({data}) => {
-            setBasketItems(data);
-            setSum(data.reduce((sum, el) => sum + el.device.price, 0));
-        }).catch(errorHandler);
+        dispatch(fetchBasketItems());
     }
 
     return (
@@ -35,7 +34,7 @@ const Basket = observer(() => {
                     <>
                         <ul className={s.listItems}>
                             {
-                                basketItems.map(item => <BasketItem key={item.id} basketItem={item} refresh={refreshData}/>)
+                                basketItems.map(item => <BasketItem key={item.idBasketItem} basketItem={item}/>)
                             }
                         </ul>
                         <p className={s.sumName}>Итого <span className={s.sumPrice}>{sum + ' ₽'}</span></p>
@@ -44,11 +43,12 @@ const Basket = observer(() => {
                     :
                     <>
                         <h2 className={s.msgEmpty}>Ваша корзина пуста</h2>
-                        <Button className={s.basketBtn} onClick={() => navigate(PRODUCTS_ROUTE)}>Перейти в каталог</Button>
+                        <Button className={s.basketBtn} onClick={() => navigate(PRODUCTS_ROUTE)}>Перейти в
+                            каталог</Button>
                     </>
             }
         </main>
     )
-})
+};
 
 export default Basket;
