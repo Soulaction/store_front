@@ -1,4 +1,3 @@
-import Auth from "../../pages/Auth"
 import Basket from "../../pages/Basket/Basket"
 import DevicePage from "../../pages/DevicePage/DevicePage"
 import Shop from "../../pages/Shop/Shop"
@@ -7,11 +6,9 @@ import {
     ADMIN_ROUTE,
     BASKET_ROUTE,
     BRAND_EDIT_ROUTE,
-    PRODUCT_ROUTE,
-    LOGIN_ROUTE,
     PRODUCT_EDIT_ROUTE,
+    PRODUCT_ROUTE,
     PRODUCTS_ROUTE,
-    REGISTRATION_ROUTE,
     SHOP_ROUTE,
     STORE_KEEPER_ROUTE,
     TYPE_EDIT_ROUTE
@@ -26,13 +23,15 @@ import {FunctionComponent} from "react";
 type RouteType = {
     path: string;
     Component: FunctionComponent;
+    roles?: string[];
     children?: RouteType[]
 }
 
 export const authRoutes: RouteType[] = [
     {
         path: BASKET_ROUTE,
-        Component: Basket
+        Component: Basket,
+        roles: ['USER', 'ADMIN']
     },
     {
         path: STORE_KEEPER_ROUTE,
@@ -41,6 +40,7 @@ export const authRoutes: RouteType[] = [
     {
         path: ADMIN_ROUTE,
         Component: Administration,
+        roles: ['ADMIN'],
         children: [
             {
                 path: PRODUCT_EDIT_ROUTE,
@@ -67,14 +67,6 @@ export const publicRoutes = [
     {
         path: PRODUCTS_ROUTE + '/:idType',
         Component: Shop
-    },
-    {
-        path: LOGIN_ROUTE,
-        Component: Auth
-    },
-    {
-        path: REGISTRATION_ROUTE,
-        Component: Auth
     },
     {
         path: PRODUCT_ROUTE + '/:id',

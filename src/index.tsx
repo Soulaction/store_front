@@ -7,7 +7,7 @@ import {Provider} from "react-redux";
 import {store} from "./store";
 
 const client = new ApolloClient({
-    uri: process.env.REACT_APP_API_URL,
+    uri: process.env.REACT_APP_API_SERVER_URL,
     cache: new InMemoryCache()
 })
 

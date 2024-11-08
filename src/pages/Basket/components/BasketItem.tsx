@@ -23,21 +23,21 @@ const BasketItem: FC<BasketItemProps> = ({basketItem}) => {
         messageApi.success('Товар удалён из корзины');
     }
 
-    const openDeviceInfo = (id: string, idBasketItem: string) => {
-        navigate(PRODUCT_ROUTE + '/' + id, {state: {idBasketItem}});
+    const openDeviceInfo = (deviceId: string, idBasketItem: string) => {
+        navigate(PRODUCT_ROUTE + '/' + deviceId, {state: {idBasketItem}});
     }
 
     return (
         <li className={s.item}>
             {contextHolder}
             <img className={s.cardImg}
-                 src={process.env.REACT_APP_API_URL.replace('/api', '') + '/devices/' + basketItem.img}
+                 src={process.env.REACT_APP_API_SERVER_URL.replace('/api', '') + '/devices/' + basketItem.img}
                  alt="Картинка товара"/>
-            <h2 className={s.cardName} onClick={() => openDeviceInfo(basketItem.id, basketItem.idBasketItem)}>{basketItem.name}</h2>
+            <h2 className={s.cardName} onClick={() => openDeviceInfo(basketItem.deviceId, basketItem.id)}>{basketItem.name}</h2>
             <p className={s.cardPrice}>{basketItem.price + ' ₽'}</p>
             <button className={s.btn}>
                 <img className={s.iconTrash}
-                     onClick={() => deleteItem(basketItem.idBasketItem)}
+                     onClick={() => deleteItem(basketItem.id)}
                      src={trashIcon}
                      alt="Иконка удаления"/>
             </button>

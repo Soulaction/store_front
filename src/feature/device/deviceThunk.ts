@@ -10,7 +10,7 @@ export const fetchDevicesData = createAsyncThunk<PaginationDevices, void,
         rejectValue: string;
     }>(
     'device/fetchDevices',
-    async (filterData, {getState, rejectWithValue}) => {
+    async (_, {getState, rejectWithValue}) => {
         try {
             const {data} = await fetchDevices(getState().device.filterData);
             return data;

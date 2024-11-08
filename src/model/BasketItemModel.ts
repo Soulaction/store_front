@@ -1,5 +1,7 @@
 import {Device} from "./Device";
 
 export type BasketItemModel = {
-    idBasketItem: string
-} & Device;
+    id?: string,
+    userId: string,
+    deviceId: string
+} & Omit<Device , 'id'>;

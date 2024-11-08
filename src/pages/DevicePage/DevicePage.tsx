@@ -13,7 +13,6 @@ import {addBasketItems, deleteBasketItems} from "../../feature/basket/basketThun
 const DevicePage = () => {
     const {id} = useParams();
     let {state: {idBasketItem}} = useLocation();
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [idItemBasket, setIdItemBasket] = useState<string | null>(idBasketItem);
     const [device, setDevice] = useState<Partial<Device>>({info: []});
@@ -46,7 +45,7 @@ const DevicePage = () => {
             <h1 className={s.title}>{device.name}</h1>
             <div className={s.content}>
                 <img className={s.productImg}
-                     src={process.env.REACT_APP_API_URL.replace('/api', '') + '/devices/' + device.img}
+                     src={process.env.REACT_APP_API_SERVER_URL.replace('/api', '') + '/devices/' + device.img}
                      alt="Картинка товара"/>
                 <div className={s.descriptionBlock}>
                     <h2 className={s.descriptionTitle}>Характеристики</h2>

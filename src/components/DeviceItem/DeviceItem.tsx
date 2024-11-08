@@ -11,6 +11,8 @@ import {deleteDevice} from "../../http/device-http";
 import {message, Popconfirm} from "antd";
 import {errorHandler} from "../../utils/utils";
 import {addBasket, DataBasket} from "../../http/basket-http";
+import {User} from "../../model/User";
+import {useAppSelector} from "../../feature/hooks/hooks";
 
 export interface DeviceItemProps {
     deviceItem: Device;
@@ -20,6 +22,7 @@ export interface DeviceItemProps {
 const DeviceItem: FC<DeviceItemProps> = ({deviceItem, isAdmin}) => {
     const [isEditModal, setIsEditModal] = useState<boolean>(false);
     const [messageApi, contextHolder] = message.useMessage();
+    const user: User = useAppSelector(state => state.userInfo.user)
 
     function dragStartHandler(e, device) {
 
@@ -43,8 +46,8 @@ const DeviceItem: FC<DeviceItemProps> = ({deviceItem, isAdmin}) => {
 
     const addProductInBasket = (deviceId: string): void => {
         const productBasket: DataBasket = {
-            id: deviceId,
-            idBasketItem: 'e2196ee5-b2de-41dd-a941-c4d5a653bc4f'
+            deviceId,
+            userId: user.id
         };
         addBasket(productBasket).then(() => {
             messageApi.success('Товар добавлен в корзину');
@@ -72,7 +75,7 @@ const DeviceItem: FC<DeviceItemProps> = ({deviceItem, isAdmin}) => {
                  onDrop={e => dragDropHandler(e, deviceItem)}
                  draggable={true}>
                 <img className={s.cardImg}
-                     src={process.env.REACT_APP_API_URL.replace('/api', '') + '/devices/' + deviceItem?.img}
+                     src={process.env.REACT_APP_API_SERVER_URL.replace('/api', '') + '/devices/' + deviceItem?.img}
                      alt={'Картинка ' + deviceItem?.name}/>
                 <Link className={s.cardName}
                       to={PRODUCT_ROUTE + '/' + deviceItem.id}

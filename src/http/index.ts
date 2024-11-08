@@ -1,25 +1,32 @@
 import axios from 'axios'
-import {msgShare} from "../utils/share";
-import {AxiosError} from "axios/index";
 
-const $host = axios.create({
-    baseURL: process.env.REACT_APP_API_URL
+const $serverHost = axios.create({
+    baseURL: process.env.REACT_APP_API_SERVER_URL
 })
 
 const $authHost = axios.create({
-    baseURL: process.env.REACT_APP_API_URL
+    baseURL: process.env.REACT_APP_API_AUTH_URL
 })
 
-$authHost.interceptors.request.use(config => {
-    config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
+const reqInterceptor = (config) => {
+    config.headers.authorization = `Bearer ${localStorage.getItem('accessToken')}`;
     return config;
-});
+}
 
-$authHost.interceptors.response.use(config => {
+const resInterceptor = (config) => {
     return config;
-});
+}
+
+//Для сервера магазина
+$serverHost.interceptors.request.use(reqInterceptor);
+$serverHost.interceptors.response.use(resInterceptor);
+
+
+//Для сервера авторизации
+$authHost.interceptors.request.use(reqInterceptor);
+$authHost.interceptors.response.use(resInterceptor);
 
 export {
-    $host,
+    $serverHost,
     $authHost
 }

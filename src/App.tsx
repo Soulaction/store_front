@@ -5,9 +5,8 @@ import {useEffect} from "react";
 import {message} from "antd";
 import {msgShare} from "./utils/share";
 import './style.css';
-import {setBasketId} from "./feature/basket/basketSlice";
 import {useAppDispatch} from "./feature/hooks/hooks";
-
+import {fetchUser} from "./feature/user/userThunk";
 
 const App = () => {
 
@@ -15,14 +14,19 @@ const App = () => {
     const [messageApi, contextHolder] = message.useMessage();
 
     useEffect(() => {
+        window.addEventListener('message', (event) => {
+            if (event.data === 'updateData') {
+                console.log('Received data:', localStorage.getItem('access'));
+            }
+        });
+        dispatch(fetchUser());
+    }, []);
+
+    useEffect(() => {
         msgShare.subscribe((msg) => {
             messageApi.error(msg);
-        })
-        dispatch(setBasketId('e2196ee5-b2de-41dd-a941-c4d5a653bc4f'));
-        return () => {
-            console.log("destroy");
-        }
-    }, [])
+        });
+    }, []);
 
     return (
         <BrowserRouter>

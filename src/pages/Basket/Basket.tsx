@@ -7,23 +7,26 @@ import {useNavigate} from "react-router-dom";
 import {PRODUCTS_ROUTE} from "../../components/AppRouter/consts";
 import {useAppDispatch, useAppSelector} from "../../feature/hooks/hooks";
 import {fetchBasketItems} from "../../feature/basket/basketThunk";
+import {User} from "../../model/User";
 
 const Basket = () => {
 
     const [sum, setSum] = useState<number>(0);
     const navigate = useNavigate();
-    const basketItems: BasketItemModel[] = useAppSelector(state => state.basket.basketItems);
     const dispatch = useAppDispatch();
+    const basketItems: BasketItemModel[] = useAppSelector(state => state.basket.basketItems);
+    const user: User = useAppSelector(state => state.userInfo.user);
+
     useEffect(() => {
-        refreshData();
-        },[])
+        user && refreshData(user.id);
+    }, [user])
 
     useEffect(() => {
         setSum(basketItems.reduce((sum, el) => sum + el.price, 0));
     }, [basketItems])
 
-    const refreshData = () => {
-        dispatch(fetchBasketItems());
+    const refreshData = (id: string) => {
+        dispatch(fetchBasketItems(id));
     }
 
     return (
@@ -34,7 +37,7 @@ const Basket = () => {
                     <>
                         <ul className={s.listItems}>
                             {
-                                basketItems.map(item => <BasketItem key={item.idBasketItem} basketItem={item}/>)
+                                basketItems.map(item => <BasketItem key={item.id} basketItem={item}/>)
                             }
                         </ul>
                         <p className={s.sumName}>Итого <span className={s.sumPrice}>{sum + ' ₽'}</span></p>

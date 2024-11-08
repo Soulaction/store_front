@@ -1,15 +1,15 @@
-import {$authHost} from "./index";
+import {$serverHost} from "./index";
 import {BasketItemModel} from "../model/BasketItemModel";
 import {AxiosResponse} from "axios";
-export type DataBasket = Pick<BasketItemModel, 'id' | 'idBasketItem'>;
+export type DataBasket = Pick<BasketItemModel, 'userId' | 'deviceId'>;
 
-export const fetchBasketProduct = async (idBasket: string): Promise<AxiosResponse<BasketItemModel[]>> => {
-    return await $authHost.get('/basket/' + idBasket);
+export const fetchBasketProduct = async (idUser: string): Promise<AxiosResponse<BasketItemModel[]>> => {
+    return await $serverHost.get('/basket/' + idUser);
 }
 
 export const addBasket = async (product: DataBasket): Promise<AxiosResponse<BasketItemModel>> => {
-    return await $authHost.post('/basket/', product);
+    return await $serverHost.post('/basket/', product);
 }
 export const deleteBasket = async (id: string): Promise<AxiosResponse<void>> => {
-    return await $authHost.delete('/basket/' + id);
+    return await $serverHost.delete('/basket/' + id);
 }

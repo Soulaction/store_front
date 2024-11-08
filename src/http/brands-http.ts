@@ -1,19 +1,19 @@
-import {$authHost} from "./index";
+import {$serverHost} from "./index";
 import {AxiosResponse} from "axios";
 import {Brand} from "../model/Brand";
 
 export const createBrand = async (brand: FormData): Promise<AxiosResponse<Brand>> => {
-        return await $authHost.post('/brand', brand);
+        return await $serverHost.post('/brand', brand);
 }
 
 export const updateBrand = async (brand: FormData): Promise<AxiosResponse<Brand>> => {
-        return await $authHost.put('/brand', brand);
+        return await $serverHost.put('/brand', brand);
 }
 
 export const fetchBrands = async (): Promise<AxiosResponse<Brand[]>> => {
-    return await $authHost.get('/brand')
+    return await $serverHost.get('/brand')
 }
 
 export const deleteBrand = async (id: string): Promise<void> => {
-    await $authHost.delete<void>('/brand/' + id);
+    await $serverHost.delete<void>('/brand/' + id);
 }

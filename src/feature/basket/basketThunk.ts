@@ -4,16 +4,14 @@ import {BasketItemModel} from "../../model/BasketItemModel";
 import {errorHandler} from "../../utils/utils";
 import {RootState} from "../../store";
 
-export const fetchBasketItems = createAsyncThunk<BasketItemModel[], void,
+export const fetchBasketItems = createAsyncThunk<BasketItemModel[], string,
     {
-        state: RootState;
         rejectValue: string;
     }>(
     'basket/fetchBasketItems',
-    async (_, {rejectWithValue, getState}) => {
+    async (userId, {rejectWithValue}) => {
         try {
-            const basketID: string = getState().basket.basketId;
-            const {data} = await fetchBasketProduct(basketID);
+            const {data} = await fetchBasketProduct(userId);
             return data;
         } catch (e) {
             const errorText = errorHandler(e);
@@ -30,7 +28,7 @@ export const addBasketItems = createAsyncThunk<BasketItemModel, string,
     'basket/addBasketItems',
     async (deviceId, {rejectWithValue, getState}) => {
         try {
-            const {data} = await addBasket({idBasketItem: getState().basket.basketId, id: deviceId});
+            const {data} = await addBasket({userId: getState().userInfo.user.id, deviceId});
             return data;
         } catch (e) {
             const errorText = errorHandler(e);
@@ -45,10 +43,10 @@ export const deleteBasketItems = createAsyncThunk<BasketItemModel[], string,
         rejectValue: string;
     }>(
     'basket/deleteBasketItems',
-    async (deviceId, {rejectWithValue, getState}) => {
+    async (idItemBasket, {rejectWithValue, getState}) => {
         try {
-            await deleteBasket(deviceId);
-            const basketItem: BasketItemModel[] = getState().basket.basketItems.filter(el => el.idBasketItem !== deviceId);
+            await deleteBasket(idItemBasket);
+            const basketItem: BasketItemModel[] = getState().basket.basketItems.filter(el => el.id !== idItemBasket);
             return basketItem;
         } catch (e) {
             const errorText = errorHandler(e);

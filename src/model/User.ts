@@ -1,7 +1,7 @@
 export interface User {
-    id: number,
+    id: string,
     fio: string,
     telephone: string
     email: string,
-    roles: string[]
+    role: string
 }
