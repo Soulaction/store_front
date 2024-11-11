@@ -14,11 +14,6 @@ const App = () => {
     const [messageApi, contextHolder] = message.useMessage();
 
     useEffect(() => {
-        window.addEventListener('message', (event) => {
-            if (event.data === 'updateData') {
-                console.log('Received data:', localStorage.getItem('access'));
-            }
-        });
         dispatch(fetchUser());
     }, []);
 

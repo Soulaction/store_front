@@ -13,7 +13,7 @@ const TypeProductItem: FC<TypeProductItemType> = ({type}) => {
     return (
         <NavLink className={s.card} to={PRODUCTS_ROUTE + '/' + type.id}>
             <img className={s.imgCard}
-                 src={`${process.env.REACT_APP_API_SERVER_URL.replace('/api', '')}/types/${type?.img}`}
+                 src={`${process.env.REACT_APP_API_SERVER_URL}/types/${type?.img}`}
                  alt={`Картинка типа ${type?.name}`}/>
             <h1 className={s.titleCard}>{type?.name}</h1>
         </NavLink>

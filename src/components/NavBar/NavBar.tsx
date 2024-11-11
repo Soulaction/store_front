@@ -29,7 +29,7 @@ const NavBar = () => {
                             onClick={() => navigate(BASKET_ROUTE)}>
                         <img className={s.icon} src={basket} alt="Иконка корзины"/>
                     </button>
-                    {userInfo.user.role === 'USER' &&
+                    {userInfo.user.role === 'ADMIN' &&
                         <button className={s.button}
                                 onClick={() => navigate(ADMIN_ROUTE + '/' + PRODUCT_EDIT_ROUTE)}
                                 type="button">
@@ -43,11 +43,9 @@ const NavBar = () => {
                     </button>
                 </div>
                 :
-                <NavLink to={process.env.REACT_APP_AUTH_APPLICATION}>
-                    <button className={s.authBtn}>
-                        Авторизация
-                    </button>
-                </NavLink>
+                <button className={s.authBtn} onClick={() => window.location.href = process.env.REACT_APP_AUTH_APPLICATION}>
+                    Авторизация
+                </button>
             }
         </header>
     )

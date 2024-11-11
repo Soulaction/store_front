@@ -6,6 +6,6 @@ export const getUser = async (): Promise<AxiosResponse<User>> => {
     return await $authHost.get('/user');
 }
 
-export const refresh = async (): Promise<void> => {
-    await $authHost.get('/refresh');
+export const refresh = async (): Promise<AxiosResponse<{accessToken: string}>> => {
+    return await $authHost.get('/refresh');
 }

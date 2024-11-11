@@ -7,29 +7,25 @@ import {User} from "../../model/User";
 const AppRouter = () => {
 
     const user: User = useAppSelector(state => state.userInfo.user);
-    console.log(authRoutes);
+
     return (
-        <>
-            {user
-                && <Routes>
-                    {authRoutes.filter(route => !route.roles || route.roles.includes(user.role))
-                        .map(({path, Component, children}) =>
-                            <Route key={path} path={path} element={<Component/>}>
-                                {children && children.map(({path, Component}) =>
-                                    <Route key={path}
-                                           path={path}
-                                           element={<Component/>}
-                                    />
-                                )}
-                            </Route>
+        <Routes>
+            {user && authRoutes.filter(route => !route.roles || route.roles.includes(user.role))
+                .map(({path, Component, children}) =>
+                    <Route key={path} path={path} element={<Component/>}>
+                        {children && children.map(({path, Component}) =>
+                            <Route key={path}
+                                   path={path}
+                                   element={<Component/>}
+                            />
                         )}
-                    {publicRoutes.map(({path, Component}) =>
-                        <Route key={path} path={path} element={<Component/>}/>
-                    )}
-                    <Route path="*" element={<Navigate to={SHOP_ROUTE}/>}/>
-                </Routes>
-            }
-        </>
+                    </Route>
+                )}
+            {publicRoutes.map(({path, Component}) =>
+                <Route key={path} path={path} element={<Component/>}/>
+            )}
+            <Route path="*" element={<Navigate to={SHOP_ROUTE}/>}/>
+        </Routes>
     )
 }
 

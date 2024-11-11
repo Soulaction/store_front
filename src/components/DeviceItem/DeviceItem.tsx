@@ -75,7 +75,7 @@ const DeviceItem: FC<DeviceItemProps> = ({deviceItem, isAdmin}) => {
                  onDrop={e => dragDropHandler(e, deviceItem)}
                  draggable={true}>
                 <img className={s.cardImg}
-                     src={process.env.REACT_APP_API_SERVER_URL.replace('/api', '') + '/devices/' + deviceItem?.img}
+                     src={process.env.REACT_APP_API_SERVER_URL + '/devices/' + deviceItem?.img}
                      alt={'Картинка ' + deviceItem?.name}/>
                 <Link className={s.cardName}
                       to={PRODUCT_ROUTE + '/' + deviceItem.id}
