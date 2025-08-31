@@ -1,6 +1,6 @@
 import {$authHost} from "./index";
 import {AxiosResponse} from "axios";
-import {User} from "../model/User";
+import {User} from "../pages/AdminUserPage/types/User";
 
 export const getUser = async (): Promise<AxiosResponse<User>> => {
     return await $authHost.get('/user');

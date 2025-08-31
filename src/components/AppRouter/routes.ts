@@ -4,8 +4,10 @@ import Shop from "../../pages/Shop/Shop"
 import Keeper from "../../pages/Keeper"
 import {
     ADMIN_ROUTE,
+    ADMIN_USER_ROUTE,
     BASKET_ROUTE,
     BRAND_EDIT_ROUTE,
+    DESK_ROUTE,
     PRODUCT_EDIT_ROUTE,
     PRODUCT_ROUTE,
     PRODUCTS_ROUTE,
@@ -72,5 +74,12 @@ export const publicRoutes = [
         path: PRODUCT_ROUTE + '/:id',
         Component: DevicePage
     },
-
+    {
+        path: ADMIN_USER_ROUTE,
+        Component: DevicePage
+    },
+    {
+        path: DESK_ROUTE,
+        Component: DevicePage
+    },
 ]

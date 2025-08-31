@@ -2,7 +2,7 @@ import {Navigate, Route, Routes} from 'react-router-dom'
 import {authRoutes, publicRoutes} from './routes';
 import {SHOP_ROUTE} from './consts';
 import {useAppSelector} from "../../feature/hooks/hooks";
-import {User} from "../../model/User";
+import {User} from "../../pages/AdminUserPage/types/User";
 
 const AppRouter = () => {
 

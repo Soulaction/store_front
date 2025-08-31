@@ -7,3 +7,5 @@ export const BRAND_EDIT_ROUTE = 'brand-edit';
 export const TYPE_EDIT_ROUTE = 'types-edit';
 export const PRODUCT_EDIT_ROUTE = 'product-edit';
 export const STORE_KEEPER_ROUTE = '/keeper';
+export const ADMIN_USER_ROUTE = '/admin-user';
+export const DESK_ROUTE = '/desk';

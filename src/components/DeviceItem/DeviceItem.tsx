@@ -11,7 +11,7 @@ import {deleteDevice} from "../../http/device-http";
 import {message, Popconfirm} from "antd";
 import {errorHandler} from "../../utils/utils";
 import {addBasket, DataBasket} from "../../http/basket-http";
-import {User} from "../../model/User";
+import {User} from "../../pages/AdminUserPage/types/User";
 import {useAppSelector} from "../../feature/hooks/hooks";
 
 export interface DeviceItemProps {

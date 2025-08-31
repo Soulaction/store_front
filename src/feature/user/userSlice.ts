@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {User} from "../../model/User";
+import {User} from "../../pages/AdminUserPage/types/User";
 import {fetchUser} from "./userThunk";
 
 export type UserStore = {

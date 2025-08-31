@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {PRODUCTS_ROUTE} from "../../components/AppRouter/consts";
 import {useAppDispatch, useAppSelector} from "../../feature/hooks/hooks";
 import {fetchBasketItems} from "../../feature/basket/basketThunk";
-import {User} from "../../model/User";
+import {User} from "../AdminUserPage/types/User";
 
 const Basket = () => {
 

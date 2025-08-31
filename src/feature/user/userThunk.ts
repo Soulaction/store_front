@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {User} from "../../model/User";
+import {User} from "../../pages/AdminUserPage/types/User";
 import {getUser} from "../../http/user-http";
 
 export const fetchUser = createAsyncThunk<User, void, {
