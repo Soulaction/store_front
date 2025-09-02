@@ -21,6 +21,8 @@ import {BrandEdit} from "../../pages/Admimstration/pages/BrandEdit/BrandEdit";
 import {TypeEdit} from "../../pages/Admimstration/pages/TypeEdit/TypeEdit";
 import {ProductEdit} from "../../pages/Admimstration/pages/ProductEdit/ProductEdit";
 import {FunctionComponent} from "react";
+import AdminUserPage from "../../pages/AdminUserPage/AdminUserPage";
+import Desk from "../../pages/Desk/Desk";
 
 type RouteType = {
     path: string;
@@ -76,10 +78,10 @@ export const publicRoutes = [
     },
     {
         path: ADMIN_USER_ROUTE,
-        Component: DevicePage
+        Component: AdminUserPage
     },
     {
         path: DESK_ROUTE,
-        Component: DevicePage
+        Component: Desk
     },
 ]
